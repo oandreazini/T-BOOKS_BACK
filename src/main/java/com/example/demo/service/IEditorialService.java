@@ -5,36 +5,37 @@ import java.util.List;
 import com.example.demo.dto.Editorial;
 
 public interface IEditorialService {
-	/**
-	 * Lists all the Provider
-	 * @return
-	 */
-	public List<Editorial> listAllProviders();
 	
 	/**
-	 * Saves a Provider
+	 * Lists all the Editorial
+	 * @return
+	 */
+	public List<Editorial> listAllEditorial();
+	
+	/**
+	 * Saves a Editorial
 	 * @param pr
 	 * @return
 	 */
-	public Editorial saveProvider(Editorial pr);
+	public Editorial saveEditorial(Editorial pr);
 	
 	/**
-	 * Gets the Provider by ID
+	 * Gets the Editorial by ID
 	 * @param id
 	 * @return
 	 */
-	public Editorial providerById(Long id);
+	public Editorial editorialById(Long id);
 	
 	/**
-	 * Updates the Provider
+	 * Updates the Editorial
 	 * @param pr
 	 * @return
 	 */
-	public Editorial updateProvider(Editorial pr);
+	public Editorial updateEditorial(Editorial pr);
 	
 	/**
-	 * Deletes the Provider
+	 * Deletes the Editorial
 	 * @param id
 	 */
-	public void deleteProvider(Long id);
+	public void deleteEditorial(Long id);
 }

@@ -20,40 +20,40 @@ import com.example.demo.service.EditorialServiceImpl;
 public class EditorialController {
 
 	@Autowired
-	EditorialServiceImpl providerServiceImpl;
+	EditorialServiceImpl editorialServiceImpl;
 	
-	@GetMapping("/providers")
-	public List<Editorial> getAllProviders() {
-		return providerServiceImpl.listAllProviders();
+	@GetMapping("/editorials")
+	public List<Editorial> getAllEditorial() {
+		return editorialServiceImpl.listAllEditorial();
 	}
 	
-	@PostMapping("/providers")
-	public Editorial saveProvider(@RequestBody Editorial pr) {
-		return providerServiceImpl.saveProvider(pr);
+	@PostMapping("/editorials")
+	public Editorial saveEditorial(@RequestBody Editorial pr) {
+		return editorialServiceImpl.saveEditorial(pr);
 	}
 	
-	@GetMapping("/providers/{id}")
-	public Editorial getProviderById(@PathVariable(name="id") Long id) {
-		return providerServiceImpl.providerById(id);
+	@GetMapping("/editorials/{id}")
+	public Editorial getEditorialById(@PathVariable(name="id") Long id) {
+		return editorialServiceImpl.editorialById(id);
 	}
 	
-	@PutMapping("/providers/{id}")
-	public Editorial updateProvider(@PathVariable(name="id") Long id, @RequestBody Editorial pr) {
-		Editorial selectedProvider;
-		Editorial updatedProvider;
+	@PutMapping("/editorials/{id}")
+	public Editorial updateEditorial(@PathVariable(name="id") Long id, @RequestBody Editorial pr) {
+		Editorial selectedEditorial;
+		Editorial updatedEditorial;
 		
-		selectedProvider = providerServiceImpl.providerById(id);
+		selectedEditorial = editorialServiceImpl.editorialById(id);
 		
-		selectedProvider.setName(pr.getName());
-		selectedProvider.setSupplies(pr.getSupplies());
+		selectedEditorial.setName(pr.getName());
+		selectedEditorial.setBooks(pr.getBooks());
+				
+		updatedEditorial = editorialServiceImpl.saveEditorial(selectedEditorial);
 		
-		updatedProvider = providerServiceImpl.saveProvider(selectedProvider);
-		
-		return updatedProvider;
+		return updatedEditorial;
 	}
 	
-	@DeleteMapping("/providers/{id}")
-	public void deleteProvider(@PathVariable(name="id") Long id) {
-		providerServiceImpl.deleteProvider(id);
+	@DeleteMapping("/editorials/{id}")
+	public void deleteEditorial(@PathVariable(name="id") Long id) {
+		editorialServiceImpl.deleteEditorial(id);
 	}
 }

@@ -14,5 +14,29 @@ public class EditorialServiceImpl implements IEditorialService{
 	@Autowired
 	IEditorialDAO iEditorialDAO;
 
+	@Override
+	public List<Editorial> listAllEditorial() {
+		return iEditorialDAO.findAll();
+	}
+
+	@Override
+	public Editorial saveEditorial(Editorial pr) {
+		return iEditorialDAO.save(pr);
+	}
+
+	@Override
+	public Editorial editorialById(Long id) {
+		return iEditorialDAO.findById(id).get();
+	}
+
+	@Override
+	public Editorial updateEditorial(Editorial pr) {
+		return iEditorialDAO.save(pr);
+	}
+
+	@Override
+	public void deleteEditorial(Long id) {
+		iEditorialDAO.deleteById(id);
+	}
 	
 }

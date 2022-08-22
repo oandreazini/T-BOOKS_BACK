@@ -21,7 +21,7 @@ public interface IUserService {
 	public User saveUser(User a);
 
 	/**
-	 * Gets the Box by ID
+	 * Gets the User by ID
 	 * @param id
 	 * @return
 	 */

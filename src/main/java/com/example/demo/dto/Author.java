@@ -36,7 +36,61 @@ public class Author {
 
 	}
 
+	
+	/**
+	 * Constructor with fields
+	 * 
+	 * @param id
+	 * @param name
+	 * @param books
+	 */
+	public Author(Long id, String name, List<Book> books) {
+		this.id = id;
+		this.name = name;
+		this.books = books;
+	}
+
+
 	// Getters and setters
+
+	/**
+	 * 
+	 * @return id
+	 */
+	public Long getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	/**
+	 * 
+	 * @return name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * 
+	 * @param name
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * 
+	 * @param books
+	 */
+	public void setBooks(List<Book> books) {
+		this.books = books;
+	}
 
 	/**
 	 * @return the list of Books
@@ -46,4 +100,14 @@ public class Author {
 	public List<Book> getBooks() {
 		return books;
 	}
+
+	/**
+	 * To String of the class
+	 */
+	@Override
+	public String toString() {
+		return "Author [id=" + id + ", name=" + name + ", books=" + books + "]";
+	}
+	
+	
 }

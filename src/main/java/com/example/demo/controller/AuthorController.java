@@ -21,40 +21,39 @@ import com.example.demo.service.AuthorServiceImpl;
 public class AuthorController {
 	
 	@Autowired
-	AuthorServiceImpl pieceServiceImpl;
+	AuthorServiceImpl authorServiceImpl;
 	
-	@GetMapping("/pieces")
-	public List<Author> getAllPieces(){
-		return pieceServiceImpl.listAllPieces();
+	@GetMapping("/authors")
+	public List<Author> getAllAuthors(){
+		return authorServiceImpl.listAllAuthors();
 	}
 	
-	@PostMapping("/pieces")
-	public Author savePiece(@RequestBody Author p) {
-		return pieceServiceImpl.savePiece(p);
+	@PostMapping("/authors")
+	public Author saveAuthor(@RequestBody Author p) {
+		return authorServiceImpl.saveAuthor(p);
 	}
 	
-	@GetMapping("/pieces/{id}")
-	public Author getPieceById(@PathVariable(name="id")Long id) {
-		return pieceServiceImpl.pieceById(id);
+	@GetMapping("/authors/{id}")
+	public Author getAuthorById(@PathVariable(name="id")Long id) {
+		return authorServiceImpl.authorById(id);
 	}
 	
-	@PutMapping("/pieces/{id}")
-	public Author updatePiece(@PathVariable(name="id")Long id, @RequestBody Author p) {
-		Author selectedPiece;
-		Author updatedPiece;
+	@PutMapping("/authors/{id}")
+	public Author updateAuthor(@PathVariable(name="id")Long id, @RequestBody Author p) {
+		Author selectedAuthor;
+		Author updatedAuthor;
 		
-		selectedPiece = pieceServiceImpl.pieceById(id);
+		selectedAuthor = authorServiceImpl.authorById(id);
 		
-		selectedPiece.setName(p.getName());
-		selectedPiece.setSupplies(p.getSupplies());
+		selectedAuthor.setName(p.getName());
 		
-		updatedPiece = pieceServiceImpl.savePiece(selectedPiece);
+		updatedAuthor = authorServiceImpl.saveAuthor(selectedAuthor);
 		
-		return updatedPiece;
+		return updatedAuthor;
 	}
 	
-	@DeleteMapping("/pieces/{id}")
-	public void deletePiece(@PathVariable(name="id")Long id) {
-		pieceServiceImpl.deletePiece(id);
+	@DeleteMapping("/authors/{id}")
+	public void deleteAuthor(@PathVariable(name="id")Long id) {
+		authorServiceImpl.deleteAuthor(id);
 	}
 }

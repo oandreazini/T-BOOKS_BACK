@@ -5,38 +5,38 @@ import java.util.List;
 import com.example.demo.dto.Author;
 
 public interface IAuthorService {
-	
+
 	/**
-	 * Lists all the Piece
+	 * Lists all the Author
 	 * @return
 	 */
-	public List<Author> listAllPieces();
-	
+	public List<Author> listAllAuthors();
+
 	/**
-	 * Saves an Piece
+	 * Saves an Author
 	 * @param p
 	 * @return
 	 */
-	public Author savePiece(Author p);
-	
+	public Author saveAuthor(Author a);
+
 	/**
 	 * Gets the Box by ID
 	 * @param id
 	 * @return
 	 */
-	public Author pieceById(Long id);
-	
+	public Author authorById(Long id);
+
 	/**
-	 * Updates the Piece
+	 * Updates the Author
 	 * @param p
 	 * @return
 	 */
-	public Author updatePiece(Author p);
-	
+	public Author updateAuthor(Author a);
+
 	/**
-	 * Deletes the Piece
+	 * Deletes the Author
 	 * @param id
 	 */
-	public void deletePiece(Long id);
+	public void deleteAuthor(Long id);
 
 }

@@ -14,5 +14,28 @@ public class AuthorServiceImpl implements IAuthorService{
 	@Autowired
 	IAuthorDAO iAuthorDAO;
 
-	
+	@Override
+	public List<Author> listAllAuthors() {
+		return iAuthorDAO.findAll();
+	}
+
+	@Override
+	public Author saveAuthor(Author author) {
+		return iAuthorDAO.save(author);
+	}
+
+	@Override
+	public Author authorById(Long id) {
+		return iAuthorDAO.findById(id).get();
+	}
+
+	@Override
+	public Author updateAuthor(Author author) {
+		return iAuthorDAO.save(author);
+	}
+
+	@Override
+	public void deleteAuthor(Long id) {
+		iAuthorDAO.deleteById(id);
+	}
 }

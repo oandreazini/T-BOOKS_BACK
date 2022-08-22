@@ -180,8 +180,10 @@ public class Book {
 	}
 
 	/**
-	 * @return the loans
+	 * @return the loans to get
 	 */
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Loan")
 	public List<Loan> getLoans() {
 		return loans;
 	}
@@ -189,9 +191,16 @@ public class Book {
 	/**
 	 * @param loans the loans to set
 	 */
-	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Loan")
 	public void setLoans(List<Loan> loans) {
 		this.loans = loans;
+	}
+
+	/**
+	 * To string of the class
+	 */
+	@Override
+	public String toString() {
+		return "Book [id=" + id + ", title=" + title + ", isbn=" + isbn + ", synopsis=" + synopsis + ", author="
+				+ author + ", editorial=" + editorial + ", user=" + user + ", loans=" + loans + "]";
 	}
 }

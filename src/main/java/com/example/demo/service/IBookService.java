@@ -38,5 +38,13 @@ public interface IBookService {
 	 * @param id of the book
 	 */
 	public void deleteBook(Long id);
+	
+	/**
+	 * Gets a list of books with the same Title as the one given
+	 * 
+	 * @param title the Title
+	 * @return the list of books
+	 */
+	public List<Book> getBooksByTitle(String title);
 
 }

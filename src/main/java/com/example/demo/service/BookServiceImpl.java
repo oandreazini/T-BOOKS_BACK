@@ -39,6 +39,8 @@ public class BookServiceImpl implements IBookService{
 		iBookDAO.deleteById(id);
 	}
 
-	
-
+	@Override
+	public List<Book> getBooksByTitle(String title) {
+		return iBookDAO.getBooksByTitle(title);
+	}
 }

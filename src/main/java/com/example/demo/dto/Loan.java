@@ -37,7 +37,7 @@ public class Loan {
 	private User user;
 
 	@ManyToOne
-	@JoinColumn(name = "user")
+	@JoinColumn(name = "book")
 	private Book book;
 
 	// Constructors

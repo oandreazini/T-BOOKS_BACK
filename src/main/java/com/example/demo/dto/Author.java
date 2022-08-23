@@ -2,6 +2,7 @@ package com.example.demo.dto;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -21,7 +22,8 @@ public class Author {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private String name;
+	@Column(name="name_surname")
+	private String nameSurname;
 
 	@OneToMany
 	@JoinColumn(name = "id")
@@ -44,9 +46,9 @@ public class Author {
 	 * @param name
 	 * @param books
 	 */
-	public Author(Long id, String name, List<Book> books) {
+	public Author(Long id, String nameSurname, List<Book> books) {
 		this.id = id;
-		this.name = name;
+		this.nameSurname = nameSurname;
 		this.books = books;
 	}
 
@@ -70,18 +72,18 @@ public class Author {
 
 	/**
 	 * 
-	 * @return name
+	 * @return nameSurname
 	 */
-	public String getName() {
-		return name;
+	public String getNameSurname() {
+		return nameSurname;
 	}
 
 	/**
 	 * 
-	 * @param name
+	 * @param nameSurname
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setNameSurname(String nameSurname) {
+		this.nameSurname = nameSurname;
 	}
 
 	/**
@@ -106,7 +108,7 @@ public class Author {
 	 */
 	@Override
 	public String toString() {
-		return "Author [id=" + id + ", name=" + name + ", books=" + books + "]";
+		return "Author [id=" + id + ", name=" + nameSurname + ", books=" + books + "]";
 	}
 	
 	

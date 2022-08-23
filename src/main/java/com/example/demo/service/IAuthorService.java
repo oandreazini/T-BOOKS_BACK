@@ -14,13 +14,13 @@ public interface IAuthorService {
 
 	/**
 	 * Saves an Author
-	 * @param p
+	 * @param a
 	 * @return
 	 */
 	public Author saveAuthor(Author a);
 
 	/**
-	 * Gets the Box by ID
+	 * Gets the Author by ID
 	 * @param id
 	 * @return
 	 */
@@ -28,7 +28,7 @@ public interface IAuthorService {
 
 	/**
 	 * Updates the Author
-	 * @param p
+	 * @param a
 	 * @return
 	 */
 	public Author updateAuthor(Author a);

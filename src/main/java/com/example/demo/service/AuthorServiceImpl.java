@@ -20,8 +20,8 @@ public class AuthorServiceImpl implements IAuthorService{
 	}
 
 	@Override
-	public Author saveAuthor(Author author) {
-		return iAuthorDAO.save(author);
+	public Author saveAuthor(Author a) {
+		return iAuthorDAO.save(a);
 	}
 
 	@Override
@@ -30,8 +30,8 @@ public class AuthorServiceImpl implements IAuthorService{
 	}
 
 	@Override
-	public Author updateAuthor(Author author) {
-		return iAuthorDAO.save(author);
+	public Author updateAuthor(Author a) {
+		return iAuthorDAO.save(a);
 	}
 
 	@Override

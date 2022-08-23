@@ -29,8 +29,8 @@ public class AuthorController {
 	}
 	
 	@PostMapping("/authors")
-	public Author saveAuthor(@RequestBody Author p) {
-		return authorServiceImpl.saveAuthor(p);
+	public Author saveAuthor(@RequestBody Author a) {
+		return authorServiceImpl.saveAuthor(a);
 	}
 	
 	@GetMapping("/authors/{id}")
@@ -39,13 +39,13 @@ public class AuthorController {
 	}
 	
 	@PutMapping("/authors/{id}")
-	public Author updateAuthor(@PathVariable(name="id")Long id, @RequestBody Author p) {
+	public Author updateAuthor(@PathVariable(name="id")Long id, @RequestBody Author a) {
 		Author selectedAuthor;
 		Author updatedAuthor;
 		
 		selectedAuthor = authorServiceImpl.authorById(id);
 		
-		selectedAuthor.setName(p.getName());
+		selectedAuthor.setNameSurname(a.getNameSurname());
 		
 		updatedAuthor = authorServiceImpl.saveAuthor(selectedAuthor);
 		

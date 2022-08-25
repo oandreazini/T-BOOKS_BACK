@@ -26,7 +26,7 @@ public class Book {
 
 	private String isbn;
 
-	// private Image image;
+	// private String image;
 
 	private String synopsis;
 

@@ -29,6 +29,11 @@ public class BookController {
 
 	@PostMapping("/books")
 	public Book saveBook(@RequestBody Book b) {
+		/*byte[] fileContent = FileUtils.readFileToByteArray(new File(filePath));
+		String encodedString = Base64.getEncoder().encodeToString(fileContent);
+		
+		byte[] decodedBytes = Base64.getDecoder().decode(encodedString);
+		FileUtils.writeByteArrayToFile(new File(outputFileName), decodedBytes);*/
 		return bookServiceImpl.saveBook(b);
 	}
 

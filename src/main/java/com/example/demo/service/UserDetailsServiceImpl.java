@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.IUserDAO;
 
+
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService{
 
@@ -21,7 +22,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = iUserDAO.findByUsername(username);
+		com.example.demo.dto.User user = iUserDAO.findByUsername(username);
 		if (user == null) {
 			throw new UsernameNotFoundException(username);
 		}

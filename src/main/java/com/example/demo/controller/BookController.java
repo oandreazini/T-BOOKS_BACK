@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.example.demo.dto.Author;
 import com.example.demo.dto.Book;
+import com.example.demo.dto.Editorial;
 import com.example.demo.service.BookServiceImpl;
 
 @RestController
@@ -68,6 +70,17 @@ public class BookController {
 	@GetMapping("/books/title/{title}")
 	public List<Book> getBooksByTitle(@PathVariable(name = "title") String title) {
 		return bookServiceImpl.getBooksByTitle(title);
+	}
+	
+	@GetMapping("/books/editorial")
+	public List<Book> findBooksByEditorial(@RequestBody Editorial editorial) {
+		return bookServiceImpl.findBooksByEditorial(editorial);
+	}
+	
+
+	@GetMapping("/books/author")
+	public List<Book> findBooksByAuthor(@RequestBody Author author) {
+		return bookServiceImpl.findBooksByAuthor(author);
 	}
 	
 	public String decoImg(String filePath) throws IOException {

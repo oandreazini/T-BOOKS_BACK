@@ -4,6 +4,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
+import static com.example.demo.security.Constants.HEADER_AUTHORIZACION_KEY;
+import static com.example.demo.security.Constants.ISSUER_INFO;
+import static com.example.demo.security.Constants.SUPER_SECRET_KEY;
+import static com.example.demo.security.Constants.TOKEN_BEARER_PREFIX;
+import static com.example.demo.security.Constants.TOKEN_EXPIRATION_TIME;
+
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

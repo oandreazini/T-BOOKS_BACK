@@ -1,7 +1,11 @@
 package com.example.demo.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,11 +33,6 @@ public class BookController {
 
 	@PostMapping("/books")
 	public Book saveBook(@RequestBody Book b) {
-		/*byte[] fileContent = FileUtils.readFileToByteArray(new File(filePath));
-		String encodedString = Base64.getEncoder().encodeToString(fileContent);
-		
-		byte[] decodedBytes = Base64.getDecoder().decode(encodedString);
-		FileUtils.writeByteArrayToFile(new File(outputFileName), decodedBytes);*/
 		return bookServiceImpl.saveBook(b);
 	}
 
@@ -69,5 +68,18 @@ public class BookController {
 	@GetMapping("/books/title/{title}")
 	public List<Book> getBooksByTitle(@PathVariable(name = "title") String title) {
 		return bookServiceImpl.getBooksByTitle(title);
+	}
+	
+	public String decoImg(String filePath) throws IOException {
+		//TODO
+		byte[] fileContent = FileUtils.readFileToByteArray(new File(filePath));
+		String encodedString = Base64.getEncoder().encodeToString(fileContent);
+		return encodedString;
+	}
+	
+	public void encodImg(String encodedString) throws IOException {
+		//TODO
+		byte[] decodedBytes = Base64.getDecoder().decode(encodedString);
+		FileUtils.writeByteArrayToFile(new File("Foto"), decodedBytes);
 	}
 }

@@ -14,6 +14,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import static com.example.demo.security.Constants.LOGIN_URL;
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
@@ -38,9 +40,13 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 		 * 4. Login dont need auth
 		 * 5. All requests need auth
 		 */
-		httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().cors().and()
-				.csrf().disable().authorizeRequests().antMatchers(HttpMethod.POST, LOGIN_URL).permitAll().anyRequest()
-				.authenticated().and().addFilter(new JWTAuthenticationFilter(authenticationManager()))
+		httpSecurity
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+				.and().cors()
+				.and().csrf().disable()
+				.authorizeRequests().antMatchers(HttpMethod.POST, LOGIN_URL).permitAll()
+				.anyRequest().authenticated()
+				.and().addFilter(new JWTAuthenticationFilter(authenticationManager()))
 				.addFilter(new JWTAuthorizationFilter(authenticationManager()));
 	}
 

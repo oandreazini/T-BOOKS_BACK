@@ -28,6 +28,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 
 	private AuthenticationManager authenticationManager;
@@ -40,10 +41,10 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
 			throws AuthenticationException {
 		try {
-			User credenciales = new ObjectMapper().readValue(request.getInputStream(), User.class);
+			com.example.demo.dto.User credentials = new ObjectMapper().readValue(request.getInputStream(), com.example.demo.dto.User.class);
 
 			return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-					credenciales.getUsername(), credenciales.getPassword(), new ArrayList<>()));
+					credentials.getUsername(), credentials.getPassword(), new ArrayList<>()));
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

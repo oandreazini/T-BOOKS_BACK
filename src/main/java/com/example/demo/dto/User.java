@@ -30,6 +30,8 @@ public class User {
 	private String username;
 	
 	private String password;
+	
+	private String role;
 
 	@OneToMany
 	@JoinColumn(name = "id")
@@ -70,12 +72,31 @@ public class User {
 	}
 
 	//Getters and Setters
+	
+	
 	/**
 	 * 
 	 * @return id
 	 */
 	public Long getId() {
 		return id;
+	}
+	
+	/**
+	 * 
+	 * @return role
+	 */
+
+	public String getRole() {
+		return role;
+	}
+
+	/**
+	 * 
+	 * @param role
+	 */
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	/**

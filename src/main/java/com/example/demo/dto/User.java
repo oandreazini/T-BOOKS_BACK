@@ -26,6 +26,12 @@ public class User {
 	private String email;
 	
 	private String phone;
+	
+	private String username;
+	
+	private String password;
+	
+	private String role;
 
 	@OneToMany
 	@JoinColumn(name = "id")
@@ -54,22 +60,43 @@ public class User {
 	 * @param loans
 	 * @param books
 	 */
-	public User(Long id, String name, String email, String phone, List<Loan> loans, List<Book> books) {
+	public User(Long id, String name, String email, String phone,String username,String password, List<Loan> loans, List<Book> books) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.phone = phone;
 		this.loans = loans;
 		this.books = books;
+		this.username = username;
+		this.password = password;
 	}
 
 	//Getters and Setters
+	
+	
 	/**
 	 * 
 	 * @return id
 	 */
 	public Long getId() {
 		return id;
+	}
+	
+	/**
+	 * 
+	 * @return role
+	 */
+
+	public String getRole() {
+		return role;
+	}
+
+	/**
+	 * 
+	 * @param role
+	 */
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	/**
@@ -126,6 +153,38 @@ public class User {
 	 */
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	/**
+	 * 
+	 * @return username
+	 */
+	public String getUsername() {
+		return username;
+	}
+
+	/**
+	 * 
+	 * @param username
+	 */
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	/**
+	 * 
+	 * @return password
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * 
+	 * @param password
+	 */
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	/**

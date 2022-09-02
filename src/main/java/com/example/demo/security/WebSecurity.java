@@ -15,6 +15,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import static com.example.demo.security.Constants.LOGIN_URL;
+import static com.example.demo.security.Constants.REGISTER_URL;
 
 @Configuration
 @EnableWebSecurity
@@ -44,7 +45,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				.and().cors()
 				.and().csrf().disable()
-				.authorizeRequests().antMatchers(HttpMethod.POST, LOGIN_URL).permitAll()
+				.authorizeRequests().antMatchers(REGISTER_URL, LOGIN_URL).permitAll()
 				.anyRequest().authenticated()
 				.and().addFilter(new JWTAuthenticationFilter(authenticationManager()))
 				.addFilter(new JWTAuthorizationFilter(authenticationManager()));

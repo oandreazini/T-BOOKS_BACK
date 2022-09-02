@@ -9,14 +9,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.Loan;
 import com.example.demo.service.LoanServiceImpl;
 
 @RestController
-@RequestMapping("/api")
 public class LoanController {
 
 	@Autowired
@@ -46,7 +44,6 @@ public class LoanController {
 
 		selectedLoan.setStart(l.getStart());
 		selectedLoan.setFinish(l.getFinish());
-		selectedLoan.setBail(l.getBail());
 		selectedLoan.setValuation(l.getValuation());
 		selectedLoan.setComment(l.getComment());
 		selectedLoan.setUser(l.getUser());

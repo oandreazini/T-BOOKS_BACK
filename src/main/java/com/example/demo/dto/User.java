@@ -31,7 +31,7 @@ public class User {
 	
 	private String password;
 	
-	private String role;
+	private String role = "user";
 
 	@OneToMany
 	@JoinColumn(name = "id")
@@ -41,6 +41,7 @@ public class User {
 	@JoinColumn(name = "id")
 	private List<Book> books;
 
+	
 	//Constructors
 	
 	/**
@@ -60,7 +61,7 @@ public class User {
 	 * @param loans
 	 * @param books
 	 */
-	public User(Long id, String name, String email, String phone,String username,String password, List<Loan> loans, List<Book> books) {
+	public User(Long id, String name, String email, String phone, String username, String password, List<Loan> loans, List<Book> books) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
@@ -71,8 +72,8 @@ public class User {
 		this.password = password;
 	}
 
-	//Getters and Setters
 	
+	//Getters and Setters
 	
 	/**
 	 * 

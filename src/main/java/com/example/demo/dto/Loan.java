@@ -26,8 +26,6 @@ public class Loan {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date finish;
 
-	private Double bail;
-
 	private Double valuation;
 
 	private String comment;
@@ -62,11 +60,10 @@ public class Loan {
 	 * @param user
 	 * @param book
 	 */
-	public Loan(Long id, Date start, Date finish, Double bail, Double valuation, String comment, User user, Book book) {
+	public Loan(Long id, Date start, Date finish, Double valuation, String comment, User user, Book book) {
 		this.id = id;
 		this.start = start;
 		this.finish = finish;
-		this.bail = bail;
 		this.valuation = valuation;
 		this.comment = comment;
 		this.user = user;
@@ -115,20 +112,6 @@ public class Loan {
 	 */
 	public void setFinish(Date finish) {
 		this.finish = finish;
-	}
-
-	/**
-	 * @return the bail
-	 */
-	public Double getBail() {
-		return bail;
-	}
-
-	/**
-	 * @param bail the bail to set
-	 */
-	public void setBail(Double bail) {
-		this.bail = bail;
 	}
 
 	/**
@@ -193,7 +176,7 @@ public class Loan {
 
 	@Override
 	public String toString() {
-		return "Loan [id=" + id + ", start=" + start + ", finish=" + finish + ", bail=" + bail + ", valuation="
+		return "Loan [id=" + id + ", start=" + start + ", finish=" + finish + ", valuation="
 				+ valuation + ", comment=" + comment + ", user=" + user + ", book=" + book + "]";
 	}
 

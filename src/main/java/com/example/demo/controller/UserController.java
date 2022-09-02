@@ -22,7 +22,6 @@ import com.example.demo.dto.User;
 import com.example.demo.service.UserServiceImpl;
 
 @RestController
-@RequestMapping("/api")
 @CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE })
 public class UserController {
 
@@ -51,7 +50,7 @@ public class UserController {
 		return userServiceImpl.listAllUsers();
 	}
 
-	@PostMapping("/users")
+	@PostMapping("/register")
 	public User saveUser(@RequestBody User u) {
 		u.setPassword(bCryptPasswordEncoder.encode(u.getPassword()));
 		return userServiceImpl.saveUser(u);

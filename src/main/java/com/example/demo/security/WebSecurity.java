@@ -33,24 +33,25 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 	}
 
 	@Override
-	protected void configure(HttpSecurity httpSecurity) throws Exception {
+	protected void configure(HttpSecurity http) throws Exception {
 		/*
 		 * 1. Disables cookies 
 		 * 2. CORS config activation with default values
 		 * 3. Disables CSRF filter 
 		 * 4. Login dont need auth
-		 * 5. All requests need auth
+		 * 5. All requests need auth except GET Books
 		 */
-		httpSecurity
+		http
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				.and().cors()
 				.and().csrf().disable()
 				.authorizeRequests()
-				.antMatchers(REGISTER_URL, LOGIN_URL).permitAll()
-				.antMatchers(HttpMethod.GET, "/books").permitAll()
-				.anyRequest().authenticated()
-				.and().addFilter(new JWTAuthenticationFilter(authenticationManager()))
-				.addFilter(new JWTAuthorizationFilter(authenticationManager()));
+					.antMatchers(REGISTER_URL, LOGIN_URL).permitAll()
+					.antMatchers(HttpMethod.GET, "/books").permitAll()
+					.anyRequest().authenticated()
+				.and()
+					.addFilter(new JWTAuthenticationFilter(authenticationManager()))
+					.addFilter(new JWTAuthorizationFilter(authenticationManager()));
 	}
 
 	@Override

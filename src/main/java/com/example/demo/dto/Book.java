@@ -26,8 +26,6 @@ public class Book {
 
 	private String isbn;
 
-	// private String image;
-
 	private String synopsis;
 
 	@ManyToOne

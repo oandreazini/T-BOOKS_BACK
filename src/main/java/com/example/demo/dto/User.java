@@ -27,6 +27,8 @@ public class User {
 	
 	private String phone;
 	
+	private String city;
+	
 	private String username;
 	
 	private String password;
@@ -58,14 +60,18 @@ public class User {
 	 * @param name
 	 * @param email
 	 * @param phone
+	 * @param city
+	 * @param username
+	 * @param password
 	 * @param loans
 	 * @param books
 	 */
-	public User(Long id, String name, String email, String phone, String username, String password, List<Loan> loans, List<Book> books) {
+	public User(Long id, String name, String email, String phone, String city, String username, String password, List<Loan> loans, List<Book> books) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.phone = phone;
+		this.city = city;
 		this.loans = loans;
 		this.books = books;
 		this.username = username;
@@ -156,6 +162,20 @@ public class User {
 		this.phone = phone;
 	}
 
+	/**
+	 * @return the city
+	 */
+	public String getCity() {
+		return city;
+	}
+
+	/**
+	 * @param city the city to set
+	 */
+	public void setCity(String city) {
+		this.city = city;
+	}
+	
 	/**
 	 * 
 	 * @return username

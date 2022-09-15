@@ -81,16 +81,16 @@ public class BookController {
 		return bookServiceImpl.findBooksByAuthor(author);
 	}
 	
-	public String decoImg(String filePath) throws IOException {
-		//TODO
-		byte[] fileContent = FileUtils.readFileToByteArray(new File(filePath));
-		String encodedString = Base64.getEncoder().encodeToString(fileContent);
-		return encodedString;
-	}
-	
-	public void encodImg(String encodedString) throws IOException {
-		//TODO
-		byte[] decodedBytes = Base64.getDecoder().decode(encodedString);
-		FileUtils.writeByteArrayToFile(new File("Foto"), decodedBytes);
-	}
+//	public String decoImg(String filePath) throws IOException {
+//		//TODO
+//		byte[] fileContent = FileUtils.readFileToByteArray(new File(filePath));
+//		String encodedString = Base64.getEncoder().encodeToString(fileContent);
+//		return encodedString;
+//	}
+//	
+//	public void encodImg(String encodedString) throws IOException {
+//		//TODO
+//		byte[] decodedBytes = Base64.getDecoder().decode(encodedString);
+//		FileUtils.writeByteArrayToFile(new File("Foto"), decodedBytes);
+//	}
 }

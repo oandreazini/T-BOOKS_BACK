@@ -71,8 +71,11 @@ public class UserController {
 		selectedUser.setName(u.getName());
 		selectedUser.setEmail(u.getEmail());
 		selectedUser.setPhone(u.getPhone());
+		selectedUser.setCity(u.getCity());
 		selectedUser.setPassword(bCryptPasswordEncoder.encode(u.getPassword()));
 		selectedUser.setRole(u.getRole());
+		selectedUser.setLoans(u.getLoans());
+		selectedUser.setBooks(u.getBooks());
 
 		updatedUser = userServiceImpl.saveUser(selectedUser);
 

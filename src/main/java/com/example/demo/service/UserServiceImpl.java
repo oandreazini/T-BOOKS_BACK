@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.IUserDAO;
-import com.example.demo.dto.User;
+import com.example.demo.dto.Usuario;
 
 
 @Service
@@ -16,22 +16,22 @@ public class UserServiceImpl implements IUserService{
 	IUserDAO iUserDAO;
 
 	@Override
-	public List<User> listAllUsers() {
+	public List<Usuario> listAllUsers() {
 		return iUserDAO.findAll();
 	}
 
 	@Override
-	public User saveUser(User user) {
+	public Usuario saveUser(Usuario user) {
 		return iUserDAO.save(user);
 	}
 
 	@Override
-	public User userById(Long id) {
+	public Usuario userById(Long id) {
 		return iUserDAO.findById(id).get();
 	}
 
 	@Override
-	public User updateUser(User user) {
+	public Usuario updateUser(Usuario user) {
 		return iUserDAO.save(user);
 	}
 
@@ -39,4 +39,5 @@ public class UserServiceImpl implements IUserService{
 	public void deleteUser(Long id) {
 		iUserDAO.deleteById(id);
 	}
+
 }

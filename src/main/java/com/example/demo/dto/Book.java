@@ -38,7 +38,7 @@ public class Book {
 
 	@ManyToOne
 	@JoinColumn(name = "user")
-	private User user;
+	private Usuario user;
 
 	@OneToMany
 	@JoinColumn(name = "id")
@@ -65,7 +65,7 @@ public class Book {
 	 * @param user
 	 * @param loans
 	 */
-	public Book(Long id, String title, String isbn, String synopsis, Author author, Editorial editorial, User user,
+	public Book(Long id, String title, String isbn, String synopsis, Author author, Editorial editorial, Usuario user,
 			List<Loan> loans) {
 		this.id = id;
 		this.title = title;
@@ -166,14 +166,14 @@ public class Book {
 	/**
 	 * @return the user
 	 */
-	public User getUser() {
+	public Usuario getUser() {
 		return user;
 	}
 
 	/**
 	 * @param user the user to set
 	 */
-	public void setUser(User user) {
+	public void setUser(Usuario user) {
 		this.user = user;
 	}
 

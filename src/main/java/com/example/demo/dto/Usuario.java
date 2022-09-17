@@ -1,5 +1,6 @@
 package com.example.demo.dto;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -7,15 +8,17 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class Usuario implements UserDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,12 +38,10 @@ public class User {
 	
 	private String role = "user";
 
-	@OneToMany
-	@JoinColumn(name = "id")
+	@OneToMany(mappedBy="id")
 	private List<Loan> loans;
 	
-	@OneToMany
-	@JoinColumn(name = "id")
+	@OneToMany(mappedBy="id")
 	private List<Book> books;
 
 	
@@ -49,7 +50,7 @@ public class User {
 	/**
 	 * Default constructor
 	 */
-	public User() {
+	public Usuario() {
 
 	}
 	
@@ -66,7 +67,7 @@ public class User {
 	 * @param loans
 	 * @param books
 	 */
-	public User(Long id, String name, String email, String phone, String city, String username, String password, List<Loan> loans, List<Book> books) {
+	public Usuario(Long id, String name, String email, String phone, String city, String username, String password, List<Loan> loans, List<Book> books) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
@@ -249,8 +250,37 @@ public class User {
 	 */
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + ", loans=" + loans
-				+ ", books=" + books + "]";
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + "]";
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 }

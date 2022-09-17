@@ -23,8 +23,7 @@ public class Editorial {
 
 	private String name;
 
-	@OneToMany
-	@JoinColumn(name = "id")
+	@OneToMany(mappedBy="id")
 	private List<Book> books;
 
 	// Constructors

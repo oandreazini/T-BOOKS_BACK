@@ -23,7 +23,7 @@ public class UserDetailsServiceImpl implements UserDetailsService, IUserService 
 	public Usuario loadUserByUsername(String username) throws UsernameNotFoundException {
 		Usuario user = iUserDAO.findByUsername(username);
 		if (user == null) {
-			throw new UsernameNotFoundException(username);
+			return null;
 		}
 		return user;
 	}

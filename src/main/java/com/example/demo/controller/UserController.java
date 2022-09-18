@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dao.IUserDAO;
+import com.example.demo.dto.Role;
 import com.example.demo.dto.Usuario;
 import com.example.demo.service.UserDetailsServiceImpl;
 
@@ -44,6 +46,7 @@ public class UserController {
 	@Autowired
 	UserDetailsServiceImpl userServiceImpl;
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/users")
 	public List<Usuario> getAllUsers() {
 		return userServiceImpl.listAllUsers();
@@ -51,8 +54,16 @@ public class UserController {
 
 	@PostMapping("/register")
 	public Usuario saveUser(@RequestBody Usuario u) {
-		u.setPassword(bCryptPasswordEncoder.encode(u.getPassword()));
-		return userServiceImpl.saveUser(u);
+		Usuario user = new Usuario();
+		
+		user.setUsername(u.getUsername());
+		user.setPhone(u.getPhone());
+		user.setEmail(u.getEmail());
+		user.setName(u.getName());
+		user.setCity(u.getCity());
+		user.setPassword(bCryptPasswordEncoder.encode(u.getPassword()));
+		user.addRole(new Role("USER"));
+		return userServiceImpl.saveUser(user);
 	}
 
 	@GetMapping("/users/{id}")
@@ -72,7 +83,6 @@ public class UserController {
 		selectedUser.setPhone(u.getPhone());
 		selectedUser.setCity(u.getCity());
 		selectedUser.setPassword(bCryptPasswordEncoder.encode(u.getPassword()));
-		selectedUser.setRole(u.getRole());
 
 		updatedUser = userServiceImpl.saveUser(selectedUser);
 

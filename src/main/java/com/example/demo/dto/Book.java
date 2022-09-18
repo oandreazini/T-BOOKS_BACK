@@ -40,8 +40,8 @@ public class Book {
 	@JoinColumn(name = "user")
 	private Usuario user;
 
-	@OneToMany
-	@JoinColumn(name = "id")
+	
+	@OneToMany(mappedBy="id")
 	private List<Loan> loans;
 
 	// Constructors

@@ -1,17 +1,26 @@
 package com.example.demo.dto;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -20,6 +29,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "users")
 public class Usuario implements UserDetails {
 
+	public enum Rol {
+	    ADMIN,
+	    USER;
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -36,8 +50,17 @@ public class Usuario implements UserDetails {
 	
 	private String password;
 	
-	private String role = "user";
+	@Enumerated(EnumType.STRING)
+    private Rol role = Rol.USER;
 
+	@ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "users_roles",
+        joinColumns = @JoinColumn(name = "users_id"),
+        inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();     
+	
 	@OneToMany(mappedBy="id")
 	private List<Loan> loans;
 	
@@ -88,23 +111,6 @@ public class Usuario implements UserDetails {
 	 */
 	public Long getId() {
 		return id;
-	}
-	
-	/**
-	 * 
-	 * @return role
-	 */
-
-	public String getRole() {
-		return role;
-	}
-
-	/**
-	 * 
-	 * @param role
-	 */
-	public void setRole(String role) {
-		this.role = role;
 	}
 
 	/**
@@ -253,11 +259,26 @@ public class Usuario implements UserDetails {
 		return "User [id=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + "]";
 	}
 
+	public Set<Role> getRoles() {
+        return roles;
+    }
+ 
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+     
+    public void addRole(Role role) {
+        this.roles.add(role);
+    }
+    
 	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        for (Role role : roles) {
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
+        }
+        return authorities;
+    }
 
 	@Override
 	public boolean isAccountNonExpired() {

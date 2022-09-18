@@ -62,7 +62,9 @@ public class UserController {
 		user.setName(u.getName());
 		user.setCity(u.getCity());
 		user.setPassword(bCryptPasswordEncoder.encode(u.getPassword()));
-		user.addRole(new Role("USER"));
+		
+		user.addRole(new Role(11));
+		
 		return userServiceImpl.saveUser(user);
 	}
 

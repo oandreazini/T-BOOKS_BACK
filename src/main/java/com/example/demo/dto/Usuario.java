@@ -29,6 +29,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "users")
 public class Usuario implements UserDetails {
 
+	private static final long serialVersionUID = 1L;
+
 	public enum Rol {
 	    ADMIN,
 	    USER;
@@ -271,6 +273,7 @@ public class Usuario implements UserDetails {
         this.roles.add(role);
     }
     
+    @JsonIgnore
 	@Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();

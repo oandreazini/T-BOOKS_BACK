@@ -1,22 +1,41 @@
 package com.example.demo.dto;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class Usuario implements UserDetails {
 
+	private static final long serialVersionUID = 1L;
+
+	public enum Rol {
+	    ADMIN,
+	    USER;
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -33,14 +52,21 @@ public class User {
 	
 	private String password;
 	
-	private String role = "user";
+	@Enumerated(EnumType.STRING)
+    private Rol role = Rol.USER;
 
-	@OneToMany
-	@JoinColumn(name = "id")
+	@ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "users_roles",
+        joinColumns = @JoinColumn(name = "users_id"),
+        inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();     
+	
+	@OneToMany(mappedBy="id")
 	private List<Loan> loans;
 	
-	@OneToMany
-	@JoinColumn(name = "id")
+	@OneToMany(mappedBy="id")
 	private List<Book> books;
 
 	
@@ -49,7 +75,7 @@ public class User {
 	/**
 	 * Default constructor
 	 */
-	public User() {
+	public Usuario() {
 
 	}
 	
@@ -66,7 +92,7 @@ public class User {
 	 * @param loans
 	 * @param books
 	 */
-	public User(Long id, String name, String email, String phone, String city, String username, String password, List<Loan> loans, List<Book> books) {
+	public Usuario(Long id, String name, String email, String phone, String city, String username, String password, List<Loan> loans, List<Book> books) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
@@ -87,23 +113,6 @@ public class User {
 	 */
 	public Long getId() {
 		return id;
-	}
-	
-	/**
-	 * 
-	 * @return role
-	 */
-
-	public String getRole() {
-		return role;
-	}
-
-	/**
-	 * 
-	 * @param role
-	 */
-	public void setRole(String role) {
-		this.role = role;
 	}
 
 	/**
@@ -249,8 +258,53 @@ public class User {
 	 */
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + ", loans=" + loans
-				+ ", books=" + books + "]";
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + "]";
+	}
+
+	public Set<Role> getRoles() {
+        return roles;
+    }
+ 
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+     
+    public void addRole(Role role) {
+        this.roles.add(role);
+    }
+    
+    @JsonIgnore
+	@Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        for (Role role : roles) {
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
+        }
+        return authorities;
+    }
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 }

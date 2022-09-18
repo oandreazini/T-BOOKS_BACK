@@ -32,7 +32,7 @@ public class Loan {
 
 	@ManyToOne
 	@JoinColumn(name = "user")
-	private User user;
+	private Usuario user;
 
 	@ManyToOne
 	@JoinColumn(name = "book")
@@ -60,7 +60,7 @@ public class Loan {
 	 * @param user
 	 * @param book
 	 */
-	public Loan(Long id, Date start, Date finish, Double valuation, String comment, User user, Book book) {
+	public Loan(Long id, Date start, Date finish, Double valuation, String comment, Usuario user, Book book) {
 		this.id = id;
 		this.start = start;
 		this.finish = finish;
@@ -145,14 +145,14 @@ public class Loan {
 	/**
 	 * @return the user
 	 */
-	public User getUser() {
+	public Usuario getUser() {
 		return user;
 	}
 
 	/**
 	 * @param user the user to set
 	 */
-	public void setUser(User user) {
+	public void setUser(Usuario user) {
 		this.user = user;
 	}
 

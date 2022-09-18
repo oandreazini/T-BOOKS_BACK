@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,13 +14,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dao.IUserDAO;
-import com.example.demo.dto.User;
-import com.example.demo.service.UserServiceImpl;
+import com.example.demo.dto.Role;
+import com.example.demo.dto.Usuario;
+import com.example.demo.service.UserDetailsServiceImpl;
 
 @RestController
 @CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE })
@@ -43,43 +44,52 @@ public class UserController {
 	}
 
 	@Autowired
-	UserServiceImpl userServiceImpl;
+	UserDetailsServiceImpl userServiceImpl;
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/users")
-	public List<User> getAllUsers() {
+	public List<Usuario> getAllUsers() {
 		return userServiceImpl.listAllUsers();
 	}
 
 	@PostMapping("/register")
-	public User saveUser(@RequestBody User u) {
-		u.setPassword(bCryptPasswordEncoder.encode(u.getPassword()));
-		return userServiceImpl.saveUser(u);
+	public Usuario saveUser(@RequestBody Usuario u) {
+		Usuario user = new Usuario();
+		
+		user.setUsername(u.getUsername());
+		user.setPhone(u.getPhone());
+		user.setEmail(u.getEmail());
+		user.setName(u.getName());
+		user.setCity(u.getCity());
+		user.setPassword(bCryptPasswordEncoder.encode(u.getPassword()));
+		
+		user.addRole(new Role(11));
+		
+		return userServiceImpl.saveUser(user);
 	}
 
 	@GetMapping("/users/{id}")
-	public User getUserById(@PathVariable(name = "id") Long id) {
+	public Usuario getUserById(@PathVariable(name = "id") Long id) {
 		return userServiceImpl.userById(id);
 	}
 
 	@PutMapping("/users/{id}")
-	public User updateUser(@PathVariable(name = "id") Long id, @RequestBody User u) {
-		User selectedUser;
-		User updatedUser;
-
-		selectedUser = userServiceImpl.userById(id);
+	public Usuario updateUser(@PathVariable(name = "id") Long id, @RequestBody Usuario u) {
+		Usuario selectedUser;
+		Usuario updatedUser;
+		
+		selectedUser = userServiceImpl.userById(u.getId());
 
 		selectedUser.setName(u.getName());
 		selectedUser.setEmail(u.getEmail());
 		selectedUser.setPhone(u.getPhone());
 		selectedUser.setCity(u.getCity());
 		selectedUser.setPassword(bCryptPasswordEncoder.encode(u.getPassword()));
-		selectedUser.setRole(u.getRole());
-		selectedUser.setLoans(u.getLoans());
-		selectedUser.setBooks(u.getBooks());
 
 		updatedUser = userServiceImpl.saveUser(selectedUser);
 
 		return updatedUser;
+
 	}
 
 	@DeleteMapping("/users/{id}")

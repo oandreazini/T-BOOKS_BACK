@@ -2,9 +2,10 @@ package com.example.demo.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.example.demo.dto.User;
+import com.example.demo.dto.Usuario;
 
-public interface IUserDAO extends JpaRepository<User, Long>{
+public interface IUserDAO extends JpaRepository<Usuario, Long>{
 
-	User findByUsername(String username);
+	Usuario findByUsername(String username);
+	Usuario findByEmail(String email);
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import com.example.demo.dto.Author;
 import com.example.demo.dto.Book;
 import com.example.demo.dto.Editorial;
+import com.example.demo.dto.Usuario;
 
 public interface IBookService {
 	
@@ -52,5 +53,7 @@ public interface IBookService {
 	public List<Book> findBooksByEditorial(Editorial editorial);
 	
 	public List<Book> findBooksByAuthor(Author author);
+	
+	public List<Book> findBooksByUsuario(Usuario usuario);
 
 }

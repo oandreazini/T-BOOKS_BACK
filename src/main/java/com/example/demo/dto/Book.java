@@ -38,7 +38,7 @@ public class Book {
 
 	@ManyToOne
 	@JoinColumn(name = "user")
-	private Usuario user;
+	private Usuario usuario;
 
 	
 	@OneToMany(mappedBy="id")
@@ -62,10 +62,10 @@ public class Book {
 	 * @param synopsis
 	 * @param author
 	 * @param editorial
-	 * @param user
+	 * @param usuario
 	 * @param loans
 	 */
-	public Book(Long id, String title, String isbn, String synopsis, Author author, Editorial editorial, Usuario user,
+	public Book(Long id, String title, String isbn, String synopsis, Author author, Editorial editorial, Usuario usuario,
 			List<Loan> loans) {
 		this.id = id;
 		this.title = title;
@@ -73,7 +73,7 @@ public class Book {
 		this.synopsis = synopsis;
 		this.author = author;
 		this.editorial = editorial;
-		this.user = user;
+		this.usuario = usuario;
 		this.loans = loans;
 	}
 
@@ -164,17 +164,17 @@ public class Book {
 	}
 
 	/**
-	 * @return the user
+	 * @return the usuario
 	 */
-	public Usuario getUser() {
-		return user;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
 	/**
-	 * @param user the user to set
+	 * @param usuario the user to set
 	 */
-	public void setUser(Usuario user) {
-		this.user = user;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	/**
@@ -199,6 +199,6 @@ public class Book {
 	@Override
 	public String toString() {
 		return "Book [id=" + id + ", title=" + title + ", isbn=" + isbn + ", synopsis=" + synopsis + ", author="
-				+ author + ", editorial=" + editorial + ", user=" + user + ", loans=" + loans + "]";
+				+ author + ", editorial=" + editorial + ", user=" + usuario + ", loans=" + loans + "]";
 	}
 }

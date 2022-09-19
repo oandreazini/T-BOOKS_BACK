@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.demo.dto.Author;
 import com.example.demo.dto.Book;
 import com.example.demo.dto.Editorial;
+import com.example.demo.dto.Usuario;
 
 public interface IBookDAO extends JpaRepository<Book, Long>{
 	
@@ -21,4 +22,6 @@ public interface IBookDAO extends JpaRepository<Book, Long>{
 	public List<Book> findBooksByEditorial(Editorial editorial);
 	
 	public List<Book> findBooksByAuthor(Author author);
+	
+	public List<Book> findBooksByUsuario(Usuario usuario);
 }

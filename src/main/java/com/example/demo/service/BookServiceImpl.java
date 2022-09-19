@@ -9,6 +9,7 @@ import com.example.demo.dao.IBookDAO;
 import com.example.demo.dto.Author;
 import com.example.demo.dto.Book;
 import com.example.demo.dto.Editorial;
+import com.example.demo.dto.Usuario;
 
 @Service
 public class BookServiceImpl implements IBookService{
@@ -54,5 +55,10 @@ public class BookServiceImpl implements IBookService{
 	@Override
 	public List<Book> findBooksByAuthor(Author author) {
 		return iBookDAO.findBooksByAuthor(author);
+	}
+	
+	@Override
+	public List<Book> findBooksByUsuario(Usuario usuario) {
+		return iBookDAO.findBooksByUsuario(usuario);
 	}
 }

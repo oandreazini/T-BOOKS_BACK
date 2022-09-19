@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.example.demo.dto.Author;
 import com.example.demo.dto.Book;
 import com.example.demo.dto.Editorial;
+import com.example.demo.dto.Usuario;
 import com.example.demo.service.BookServiceImpl;
 
 @RestController
@@ -49,7 +50,7 @@ public class BookController {
 		selectedBook.setSynopsis(b.getSynopsis());
 		selectedBook.setAuthor(b.getAuthor());
 		selectedBook.setEditorial(b.getEditorial());
-		selectedBook.setUser(b.getUser());
+		selectedBook.setUsuario(b.getUsuario());
 
 		updatedBook = bookServiceImpl.saveBook(selectedBook);
 
@@ -75,6 +76,11 @@ public class BookController {
 	@GetMapping("/books/author")
 	public List<Book> findBooksByAuthor(@RequestBody Author author) {
 		return bookServiceImpl.findBooksByAuthor(author);
+	}
+	
+	@GetMapping("/books/user")
+	public List<Book> findBooksByUsuario(@RequestBody Usuario usuario) {
+		return bookServiceImpl.findBooksByUsuario(usuario);
 	}
 	
 //	public String decoImg(String filePath) throws IOException {

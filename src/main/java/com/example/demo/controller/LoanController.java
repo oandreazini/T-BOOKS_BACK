@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.dto.Book;
 import com.example.demo.dto.Loan;
+import com.example.demo.dto.Usuario;
 import com.example.demo.service.LoanServiceImpl;
 
 @RestController
@@ -57,5 +59,10 @@ public class LoanController {
 	@DeleteMapping("/loans/{id}")
 	public void deleteLoan(@PathVariable(name = "id") Long id) {
 		loanServiceImpl.deleteLoan(id);
+	}
+	
+	@GetMapping("/loans/book")
+	public List<Loan> findLoansByBook(@RequestBody Book book) {
+		return loanServiceImpl.findLoansByBook(book);
 	}
 }

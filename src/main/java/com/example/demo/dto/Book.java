@@ -28,13 +28,9 @@ public class Book {
 
 	private String synopsis;
 
-	@ManyToOne
-	@JoinColumn(name = "author")
-	private Author author;
+	private String author;
 
-	@ManyToOne
-	@JoinColumn(name = "editorial")
-	private Editorial editorial;
+	private String editorial;
 
 	@ManyToOne
 	@JoinColumn(name = "user")
@@ -65,7 +61,7 @@ public class Book {
 	 * @param usuario
 	 * @param loans
 	 */
-	public Book(Long id, String title, String isbn, String synopsis, Author author, Editorial editorial, Usuario usuario,
+	public Book(Long id, String title, String isbn, String synopsis, String author, String editorial, Usuario usuario,
 			List<Loan> loans) {
 		this.id = id;
 		this.title = title;
@@ -138,28 +134,28 @@ public class Book {
 	/**
 	 * @return the author
 	 */
-	public Author getAuthor() {
+	public String getAuthor() {
 		return author;
 	}
 
 	/**
 	 * @param author the author to set
 	 */
-	public void setAuthor(Author author) {
+	public void setAuthor(String author) {
 		this.author = author;
 	}
 
 	/**
 	 * @return the editorial
 	 */
-	public Editorial getEditorial() {
+	public String getEditorial() {
 		return editorial;
 	}
 
 	/**
 	 * @param editorial the editorial to set
 	 */
-	public void setEditorial(Editorial editorial) {
+	public void setEditorial(String editorial) {
 		this.editorial = editorial;
 	}
 

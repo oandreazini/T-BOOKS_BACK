@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.IBookDAO;
-import com.example.demo.dto.Author;
 import com.example.demo.dto.Book;
-import com.example.demo.dto.Editorial;
 import com.example.demo.dto.Usuario;
 
 @Service
@@ -48,12 +46,12 @@ public class BookServiceImpl implements IBookService{
 	}
 
 	@Override
-	public List<Book> findBooksByEditorial(Editorial editorial) {
+	public List<Book> findBooksByEditorial(String editorial) {
 		return iBookDAO.findBooksByEditorial(editorial);
 	}
 	
 	@Override
-	public List<Book> findBooksByAuthor(Author author) {
+	public List<Book> findBooksByAuthor(String author) {
 		return iBookDAO.findBooksByAuthor(author);
 	}
 	

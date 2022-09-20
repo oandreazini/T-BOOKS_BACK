@@ -2,9 +2,7 @@ package com.example.demo.service;
 
 import java.util.List;
 
-import com.example.demo.dto.Author;
 import com.example.demo.dto.Book;
-import com.example.demo.dto.Editorial;
 import com.example.demo.dto.Usuario;
 
 public interface IBookService {
@@ -50,10 +48,28 @@ public interface IBookService {
 	 */
 	public List<Book> getBooksByTitle(String title);
 	
-	public List<Book> findBooksByEditorial(Editorial editorial);
+	/**
+	 * Returns all the books of the given editorial
+	 * 
+	 * @param editorial
+	 * @return
+	 */
+	public List<Book> findBooksByEditorial(String editorial);
 	
-	public List<Book> findBooksByAuthor(Author author);
+	/**
+	 * Returns all the books of the given author
+	 * 
+	 * @param author
+	 * @return
+	 */
+	public List<Book> findBooksByAuthor(String author);
 	
+	/**
+	 * Returns all the books of the given user
+	 * 
+	 * @param usuario
+	 * @return
+	 */
 	public List<Book> findBooksByUsuario(Usuario usuario);
 
 }

@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.example.demo.dto.Author;
 import com.example.demo.dto.Book;
-import com.example.demo.dto.Editorial;
 import com.example.demo.dto.Usuario;
 import com.example.demo.service.BookServiceImpl;
 
@@ -67,14 +65,14 @@ public class BookController {
 		return bookServiceImpl.getBooksByTitle(title);
 	}
 	
-	@GetMapping("/books/editorial")
-	public List<Book> findBooksByEditorial(@RequestBody Editorial editorial) {
+	@GetMapping("/books/editorial/{editorial}")
+	public List<Book> findBooksByEditorial(@PathVariable(name = "editorial") String editorial) {
 		return bookServiceImpl.findBooksByEditorial(editorial);
 	}
 	
 
-	@GetMapping("/books/author")
-	public List<Book> findBooksByAuthor(@RequestBody Author author) {
+	@GetMapping("/books/author/{author}")
+	public List<Book> findBooksByAuthor(@PathVariable(name = "author") String author) {
 		return bookServiceImpl.findBooksByAuthor(author);
 	}
 	
@@ -83,16 +81,4 @@ public class BookController {
 		return bookServiceImpl.findBooksByUsuario(usuario);
 	}
 	
-//	public String decoImg(String filePath) throws IOException {
-//		//TODO
-//		byte[] fileContent = FileUtils.readFileToByteArray(new File(filePath));
-//		String encodedString = Base64.getEncoder().encodeToString(fileContent);
-//		return encodedString;
-//	}
-//	
-//	public void encodImg(String encodedString) throws IOException {
-//		//TODO
-//		byte[] decodedBytes = Base64.getDecoder().decode(encodedString);
-//		FileUtils.writeByteArrayToFile(new File("Foto"), decodedBytes);
-//	}
 }

@@ -2,7 +2,9 @@ package com.example.demo.service;
 
 import java.util.List;
 
+import com.example.demo.dto.Book;
 import com.example.demo.dto.Loan;
+import com.example.demo.dto.Usuario;
 
 public interface ILoanService {
 	/**
@@ -37,5 +39,13 @@ public interface ILoanService {
 	 * @param id
 	 */
 	public void deleteLoan(Long id);
+	
+	/**
+	 * Returns all the loans of the given book
+	 * 
+	 * @param book
+	 * @return
+	 */
+	public List<Loan> findLoansByBook(Book book);
 }
 

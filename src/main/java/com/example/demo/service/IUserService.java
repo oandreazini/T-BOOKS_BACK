@@ -39,4 +39,11 @@ public interface IUserService {
 	 * @param id
 	 */
 	public void deleteUser(Long id);
+	
+	/**
+	 * Returns a User with the username given
+	 * @param username
+	 * @return
+	 */
+	public Usuario getUsuarioByUsername(String username);
 }

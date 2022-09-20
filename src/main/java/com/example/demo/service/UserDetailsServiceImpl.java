@@ -52,5 +52,10 @@ public class UserDetailsServiceImpl implements UserDetailsService, IUserService 
 	public void deleteUser(Long id) {
 		iUserDAO.deleteById(id);
 	}
+	
+	@Override
+	public Usuario getUsuarioByUsername(String username) {
+		return iUserDAO.findByUsername(username);
+	}
 
 }

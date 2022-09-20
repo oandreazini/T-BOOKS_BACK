@@ -6,6 +6,7 @@ import com.example.demo.dto.Usuario;
 
 public interface IUserDAO extends JpaRepository<Usuario, Long>{
 
-	Usuario findByUsername(String username);
-	Usuario findByEmail(String email);
+	public Usuario findByUsername(String username);
+	
+	public Usuario findByEmail(String email);
 }

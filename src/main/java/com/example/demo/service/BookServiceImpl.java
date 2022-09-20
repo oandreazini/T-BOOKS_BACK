@@ -45,15 +45,15 @@ public class BookServiceImpl implements IBookService{
 		return iBookDAO.getBooksByTitle(title);
 	}
 
-//	@Override
-//	public List<Book> findBooksByEditorial(String editorial) {
-//		return iBookDAO.findBooksByEditorial(editorial);
-//	}
-//	
-//	@Override
-//	public List<Book> findBooksByAuthor(String author) {
-//		return iBookDAO.findBooksByAuthor(author);
-//	}
+	@Override
+	public List<Book> findBooksByEditorial(String editorial) {
+		return iBookDAO.findBooksByEditorial(editorial);
+	}
+	
+	@Override
+	public List<Book> findBooksByAuthor(String author) {
+		return iBookDAO.findBooksByAuthor(author);
+	}
 	
 	@Override
 	public List<Book> findBooksByUsuario(Usuario usuario) {

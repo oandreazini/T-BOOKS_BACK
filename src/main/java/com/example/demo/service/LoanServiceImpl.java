@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.ILoanDAO;
+import com.example.demo.dto.Book;
 import com.example.demo.dto.Loan;
 
 @Service
@@ -37,6 +38,11 @@ public class LoanServiceImpl implements ILoanService {
 	@Override
 	public void deleteLoan(Long id) {
 		iLoanDAO.deleteById(id);
+	}
+
+	@Override
+	public List<Loan> findLoansByBook(Book book) {
+		return iLoanDAO.findLoansByBook(book);
 	}
 
 }

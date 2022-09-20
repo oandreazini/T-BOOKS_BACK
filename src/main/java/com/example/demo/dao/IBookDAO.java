@@ -17,9 +17,9 @@ public interface IBookDAO extends JpaRepository<Book, Long>{
 	 */
 	public List<Book> getBooksByTitle(String title);
 	
-//	public List<Book> findBooksByEditorial(String editorial);
-//	
-//	public List<Book> findBooksByAuthor(String author);
+	public List<Book> findBooksByEditorial(String editorial);
+	
+	public List<Book> findBooksByAuthor(String author);
 	
 	public List<Book> findBooksByUsuario(Usuario usuario);
 }

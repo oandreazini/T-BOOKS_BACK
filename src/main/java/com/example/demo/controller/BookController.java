@@ -14,12 +14,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.example.demo.dto.Book;
 import com.example.demo.dto.Usuario;
 import com.example.demo.service.BookServiceImpl;
+import com.example.demo.service.UserServiceImpl;
 
 @RestController
 public class BookController {
 
 	@Autowired
 	BookServiceImpl bookServiceImpl;
+	
+	@Autowired
+	UserServiceImpl userServiceImpl;
 
 	@GetMapping("/books")
 	public List<Book> getAllBooks() {
@@ -76,9 +80,9 @@ public class BookController {
 		return bookServiceImpl.findBooksByAuthor(author);
 	}
 	
-	@GetMapping("/books/user")
-	public List<Book> findBooksByUsuario(@RequestBody Usuario usuario) {
-		return bookServiceImpl.findBooksByUsuario(usuario);
+	@GetMapping("/books/user/{id}")
+	public List<Book> findBooksByIdUsuario(@PathVariable(name = "id") Long idUsuario) {
+		return bookServiceImpl.findBooksByUsuario(userServiceImpl.userById(idUsuario));
 	}
 	
 }

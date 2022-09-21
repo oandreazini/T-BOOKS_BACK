@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.demo.dto.Book;
-import com.example.demo.dto.Usuario;
 import com.example.demo.service.BookServiceImpl;
-import com.example.demo.service.UserServiceImpl;
+import com.example.demo.service.UserDetailsServiceImpl;
+
 
 @RestController
 public class BookController {
@@ -23,7 +23,7 @@ public class BookController {
 	BookServiceImpl bookServiceImpl;
 	
 	@Autowired
-	UserServiceImpl userServiceImpl;
+	UserDetailsServiceImpl userServiceImpl;
 
 	@GetMapping("/books")
 	public List<Book> getAllBooks() {

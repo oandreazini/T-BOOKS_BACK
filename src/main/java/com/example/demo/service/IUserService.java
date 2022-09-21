@@ -54,11 +54,6 @@ public interface IUserService {
 	 */
 	public Usuario getUsuarioByEmail(String email);
 	
-	/**
-	 * 
-	 * @param phone
-	 * @return
-	 */
-	public Usuario getUsuarioByPhone(String phone);
+	
 	
 }

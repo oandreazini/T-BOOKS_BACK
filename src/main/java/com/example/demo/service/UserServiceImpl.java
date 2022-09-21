@@ -45,15 +45,10 @@ public class UserServiceImpl implements IUserService{
 		return iUserDAO.findByUsername(username);
 	}
 	
-	
+	@Override
 	public Usuario getUsuarioByEmail(String email) {
 		return iUserDAO.findByEmail(email);
 	}
 
-	
-	public Usuario getUsuarioByPhone(String phone) {
-		return iUserDAO.findByPhone(phone);
-		
-	}
 
 }

@@ -44,5 +44,16 @@ public class UserServiceImpl implements IUserService{
 	public Usuario getUsuarioByUsername(String username) {
 		return iUserDAO.findByUsername(username);
 	}
+	
+	@Override
+	public Usuario getUsuarioByEmail(String email) {
+		return iUserDAO.findByEmail(email);
+	}
+
+	@Override
+	public Usuario getUsuarioByPhone(String phone) {
+		return iUserDAO.findByPhone(phone);
+		
+	}
 
 }

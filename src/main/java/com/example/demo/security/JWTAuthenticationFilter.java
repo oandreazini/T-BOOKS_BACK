@@ -24,14 +24,17 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.example.demo.dto.Usuario;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
-
-public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter{
+public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
 	private AuthenticationManager authenticationManager;
+
+	private Gson gson = new Gson();
 
 	public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
 		this.authenticationManager = authenticationManager;
@@ -44,34 +47,32 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 			Usuario credentials = new ObjectMapper().readValue(request.getInputStream(), Usuario.class);
 
 			System.out.println(credentials.getAuthorities().toString());
-			
-			return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-					credentials.getUsername(), credentials.getPassword(), credentials.getAuthorities()));
+
+			return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(credentials.getUsername(),
+					credentials.getPassword(), credentials.getAuthorities()));
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
 	public String generateAccessToken(Usuario user) {
-		
-		final String authorities = user.getAuthorities().stream()
-			.map(GrantedAuthority::getAuthority)
-            .collect(Collectors.joining(","));
-		
+
+		final String authorities = user.getAuthorities().stream().map(GrantedAuthority::getAuthority)
+				.collect(Collectors.joining(","));
+
 		return Jwts.builder()
-			// Token Issuing Date
-			.setIssuedAt(new Date())
-			// Token Issuer (Us)
-			.setIssuer(ISSUER_INFO)
-			.claim("roles", authorities)
-			// Subject for the Token (User who requested it)
-			.setSubject(user.getUsername())
-			// Expiration date for the token
-			.setExpiration(new Date(System.currentTimeMillis() + TOKEN_EXPIRATION_TIME))
-			// What to sign the token with
-			.signWith(SignatureAlgorithm.HS512, SUPER_SECRET_KEY)
-			// Build and sign the token
-			.compact();		
+				// Token Issuing Date
+				.setIssuedAt(new Date())
+				// Token Issuer (Us)
+				.setIssuer(ISSUER_INFO).claim("roles", authorities)
+				// Subject for the Token (User who requested it)
+				.setSubject(user.getUsername())
+				// Expiration date for the token
+				.setExpiration(new Date(System.currentTimeMillis() + TOKEN_EXPIRATION_TIME))
+				// What to sign the token with
+				.signWith(SignatureAlgorithm.HS512, SUPER_SECRET_KEY)
+				// Build and sign the token
+				.compact();
 	}
 
 	@Override
@@ -79,11 +80,27 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 			Authentication auth) throws IOException, ServletException {
 
 		String JWTToken = generateAccessToken((Usuario) auth.getPrincipal());
-		
+		String userId = String.valueOf(((Usuario) auth.getPrincipal()).getId());
+		String roles = String.valueOf(((Usuario) auth.getPrincipal()).getRoles()).replace("[", "").replace("]", "");
+
 		response.addHeader(HEADER_AUTHORIZACION_KEY, TOKEN_BEARER_PREFIX + " " + JWTToken); // Token in header
-		response.getWriter().write("{\"token\": \"" + JWTToken + "\"}"); // Token in body
+		
+		// JSON Object
+		JsonObject json = new JsonObject();
+
+		// token keypair.
+		json.addProperty("token", JWTToken);
+		json.addProperty("userId", userId);
+		json.addProperty("roles", roles);
+		
+		String userJsonString = this.gson.toJson(json);
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+
+		// ...and response
+		response.getWriter().write(userJsonString);
 		System.out.println(response.getHeader(HEADER_AUTHORIZACION_KEY));
-	
+
 	}
-	
+
 }

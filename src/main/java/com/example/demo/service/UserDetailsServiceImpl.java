@@ -58,4 +58,14 @@ public class UserDetailsServiceImpl implements UserDetailsService, IUserService 
 		return iUserDAO.findByUsername(username);
 	}
 
+	
+	public Usuario getUsuarioByEmail(String email) {
+		return iUserDAO.findByEmail(email);
+	}
+
+	
+	public Usuario getUsuarioByPhone(String phone) {
+		return iUserDAO.findByPhone(phone);
+	}
+
 }

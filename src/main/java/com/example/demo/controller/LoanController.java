@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.dto.Book;
 import com.example.demo.dto.Loan;
 import com.example.demo.service.BookServiceImpl;
 import com.example.demo.service.LoanServiceImpl;

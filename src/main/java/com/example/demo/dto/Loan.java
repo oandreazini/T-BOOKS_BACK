@@ -1,6 +1,5 @@
 package com.example.demo.dto;
 
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,10 +20,10 @@ public class Loan {
 	private Long id;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date start;
+	private String start;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date finish;
+	private String finish;
 
 	private Double valuation;
 
@@ -60,7 +59,7 @@ public class Loan {
 	 * @param user
 	 * @param book
 	 */
-	public Loan(Long id, Date start, Date finish, Double valuation, String comment, Usuario user, Book book) {
+	public Loan(Long id, String start, String finish, Double valuation, String comment, Usuario user, Book book) {
 		this.id = id;
 		this.start = start;
 		this.finish = finish;
@@ -89,28 +88,28 @@ public class Loan {
 	/**
 	 * @return the start
 	 */
-	public Date getStart() {
+	public String getStart() {
 		return start;
 	}
 
 	/**
 	 * @param start the start to set
 	 */
-	public void setStart(Date start) {
+	public void setStart(String start) {
 		this.start = start;
 	}
 
 	/**
 	 * @return the finish
 	 */
-	public Date getFinish() {
+	public String getFinish() {
 		return finish;
 	}
 
 	/**
 	 * @param finish the finish to set
 	 */
-	public void setFinish(Date finish) {
+	public void setFinish(String finish) {
 		this.finish = finish;
 	}
 

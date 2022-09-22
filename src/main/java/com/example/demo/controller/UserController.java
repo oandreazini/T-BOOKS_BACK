@@ -77,12 +77,26 @@ public class UserController {
 		Usuario selectedUser;
 		Usuario updatedUser;
 		
-		selectedUser = userServiceImpl.userById(u.getId());
+		selectedUser = userServiceImpl.userById(id);
 
 		selectedUser.setName(u.getName());
 		selectedUser.setEmail(u.getEmail());
 		selectedUser.setPhone(u.getPhone());
 		selectedUser.setCity(u.getCity());
+
+		updatedUser = userServiceImpl.saveUser(selectedUser);
+
+		return updatedUser;
+
+	}
+	
+	@PutMapping("/users/pass/{id}")
+	public Usuario updatePass(@PathVariable(name = "id") Long id, @RequestBody Usuario u) {
+		Usuario selectedUser;
+		Usuario updatedUser;
+		
+		selectedUser = userServiceImpl.userById(id);
+
 		selectedUser.setPassword(bCryptPasswordEncoder.encode(u.getPassword()));
 
 		updatedUser = userServiceImpl.saveUser(selectedUser);

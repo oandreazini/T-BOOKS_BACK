@@ -50,7 +50,7 @@ public class LoanController {
 		selectedLoan.setFinish(l.getFinish());
 		selectedLoan.setValuation(l.getValuation());
 		selectedLoan.setComment(l.getComment());
-		selectedLoan.setUser(l.getUser());
+		selectedLoan.setUsuario(l.getUsuario());
 		selectedLoan.setBook(l.getBook());
 
 		updatedLoan = loanServiceImpl.saveLoan(selectedLoan);

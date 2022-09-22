@@ -82,22 +82,26 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		String JWTToken = generateAccessToken((Usuario) auth.getPrincipal());
 		String userId = String.valueOf(((Usuario) auth.getPrincipal()).getId());
 		String roles = String.valueOf(((Usuario) auth.getPrincipal()).getRoles()).replace("[", "").replace("]", "");
+//		String email = String.valueOf(((Usuario) auth.getPrincipal()).getEmail());
+//		String phone = String.valueOf(((Usuario) auth.getPrincipal()).getPhone());
 
 		response.addHeader(HEADER_AUTHORIZACION_KEY, TOKEN_BEARER_PREFIX + " " + JWTToken); // Token in header
 		
 		// JSON Object
 		JsonObject json = new JsonObject();
 
-		// token keypair.
+		// Keypairs
 		json.addProperty("token", JWTToken);
 		json.addProperty("userId", userId);
 		json.addProperty("roles", roles);
+//		json.addProperty("email", email);
+//		json.addProperty("phone", phone);
 		
 		String userJsonString = this.gson.toJson(json);
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 
-		// ...and response
+		// Response
 		response.getWriter().write(userJsonString);
 		System.out.println(response.getHeader(HEADER_AUTHORIZACION_KEY));
 

@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.example.demo.dto.Book;
 import com.example.demo.dto.Loan;
-import com.example.demo.dto.Usuario;
 
 public interface ILoanService {
 	/**

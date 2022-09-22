@@ -27,7 +27,7 @@ public class Loan {
 
 	@ManyToOne
 	@JoinColumn(name = "user")
-	private Usuario user;
+	private Usuario usuario;
 
 	@ManyToOne
 	@JoinColumn(name = "book")
@@ -52,16 +52,16 @@ public class Loan {
 	 * @param bail
 	 * @param valuation
 	 * @param comment
-	 * @param user
+	 * @param usuario
 	 * @param book
 	 */
-	public Loan(Long id, String start, String finish, Double valuation, String comment, Usuario user, Book book) {
+	public Loan(Long id, String start, String finish, Double valuation, String comment, Usuario usuario, Book book) {
 		this.id = id;
 		this.start = start;
 		this.finish = finish;
 		this.valuation = valuation;
 		this.comment = comment;
-		this.user = user;
+		this.usuario = usuario;
 		this.book = book;
 	}
 
@@ -138,17 +138,17 @@ public class Loan {
 	}
 
 	/**
-	 * @return the user
+	 * @return the usuario
 	 */
-	public Usuario getUser() {
-		return user;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
 	/**
 	 * @param user the user to set
 	 */
-	public void setUser(Usuario user) {
-		this.user = user;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	/**
@@ -172,7 +172,7 @@ public class Loan {
 	@Override
 	public String toString() {
 		return "Loan [id=" + id + ", start=" + start + ", finish=" + finish + ", valuation="
-				+ valuation + ", comment=" + comment + ", user=" + user + ", book=" + book + "]";
+				+ valuation + ", comment=" + comment + ", usuario=" + usuario + ", book=" + book + "]";
 	}
 
 }

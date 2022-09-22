@@ -97,7 +97,7 @@ public class UserController {
 		
 		selectedUser = userServiceImpl.userById(id);
 
-		selectedUser.setPassword(bCryptPasswordEncoder.encode(u.getPassword()));
+		selectedUser.setPassword(u.getPassword());
 
 		updatedUser = userServiceImpl.saveUser(selectedUser);
 

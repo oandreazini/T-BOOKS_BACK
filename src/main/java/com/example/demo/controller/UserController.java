@@ -46,7 +46,6 @@ public class UserController {
 	@Autowired
 	UserDetailsServiceImpl userServiceImpl;
 
-	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/users")
 	public List<Usuario> getAllUsers() {
 		return userServiceImpl.listAllUsers();

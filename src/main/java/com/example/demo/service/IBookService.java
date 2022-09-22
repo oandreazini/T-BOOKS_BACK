@@ -71,5 +71,11 @@ public interface IBookService {
 	 * @return
 	 */
 	public List<Book> findBooksByUsuario(Usuario usuario);
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public List<Book> findBooksByIsbn(String isbn);
 
 }

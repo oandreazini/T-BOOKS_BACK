@@ -85,4 +85,9 @@ public class BookController {
 		return bookServiceImpl.findBooksByUsuario(userServiceImpl.userById(idUsuario));
 	}
 	
+	@GetMapping("/books/isbn/{isbn}")
+	public List<Book> findBooksByIsbn(@PathVariable(name = "isbn") String isbn) {
+		return bookServiceImpl.findBooksByIsbn(isbn);
+	}
+	
 }

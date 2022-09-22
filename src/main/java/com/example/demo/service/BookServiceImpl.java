@@ -59,4 +59,8 @@ public class BookServiceImpl implements IBookService{
 	public List<Book> findBooksByUsuario(Usuario usuario) {
 		return iBookDAO.findBooksByUsuario(usuario);
 	}
+
+	public List<Book> findBooksByIsbn(String isbn) {
+		return iBookDAO.findBooksByIsbn(isbn);
+	}
 }

@@ -1,8 +1,12 @@
 package com.example.demo.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,7 +14,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.dao.IBookDAO;
 import com.example.demo.dto.Book;
 import com.example.demo.service.BookServiceImpl;
 import com.example.demo.service.UserDetailsServiceImpl;
@@ -24,7 +30,10 @@ public class BookController {
 	
 	@Autowired
 	UserDetailsServiceImpl userServiceImpl;
-
+	
+	@Autowired
+	IBookDAO ibookDAO;
+	
 	@GetMapping("/books")
 	public List<Book> getAllBooks() {
 		return bookServiceImpl.listAllBooks();
@@ -74,7 +83,6 @@ public class BookController {
 		return bookServiceImpl.findBooksByEditorial(editorial);
 	}
 	
-
 	@GetMapping("/books/author/{author}")
 	public List<Book> findBooksByAuthor(@PathVariable(name = "author") String author) {
 		return bookServiceImpl.findBooksByAuthor(author);
@@ -88,6 +96,19 @@ public class BookController {
 	@GetMapping("/books/isbn/{isbn}")
 	public List<Book> findBooksByIsbn(@PathVariable(name = "isbn") String isbn) {
 		return bookServiceImpl.findBooksByIsbn(isbn);
+	}
+	
+	@GetMapping("/bookspage")
+	public Page<Book> getAPageBooks(
+			@RequestParam Optional<String> sortBy,
+			@RequestParam Optional <Integer> page
+			) {
+		return ibookDAO.findAll(
+				PageRequest.of(
+				page.orElse(0),2,
+				
+				Sort.Direction.ASC, sortBy.orElse( "id"))
+	);
 	}
 	
 }

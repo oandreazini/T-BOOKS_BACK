@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.dto.Loan;
 import com.example.demo.service.BookServiceImpl;
 import com.example.demo.service.LoanServiceImpl;
+import com.example.demo.service.UserDetailsServiceImpl;
 
 @RestController
 public class LoanController {
@@ -23,6 +24,9 @@ public class LoanController {
 	
 	@Autowired
 	BookServiceImpl bookServiceImpl;
+	
+	@Autowired
+	UserDetailsServiceImpl userServiceImpl;
 
 	@GetMapping("/loans")
 	public List<Loan> getAllLoans() {
@@ -66,5 +70,10 @@ public class LoanController {
 	@GetMapping("/loans/book/{id}")
 	public List<Loan> findLoansByBook(@PathVariable(name = "id") Long idBook) {
 		return loanServiceImpl.findLoansByBook(bookServiceImpl.bookById(idBook));
+	}
+	
+	@GetMapping("/loans/usuario/{id}")
+	public List<Loan> findLoansByUsuario(@PathVariable(name = "id") Long idUser) {
+		return loanServiceImpl.findLoansByUsuario(userServiceImpl.userById(idUser));
 	}
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.dao.ILoanDAO;
 import com.example.demo.dto.Book;
 import com.example.demo.dto.Loan;
+import com.example.demo.dto.Usuario;
 
 @Service
 public class LoanServiceImpl implements ILoanService {
@@ -43,6 +44,11 @@ public class LoanServiceImpl implements ILoanService {
 	@Override
 	public List<Loan> findLoansByBook(Book book) {
 		return iLoanDAO.findLoansByBook(book);
+	}
+	
+	@Override
+	public List<Loan> findLoansByUsuario(Usuario usuario) {
+		return iLoanDAO.findLoansByUsuario(usuario);
 	}
 
 }

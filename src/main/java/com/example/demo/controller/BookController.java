@@ -105,7 +105,7 @@ public class BookController {
 			) {
 		return ibookDAO.findAll(
 				PageRequest.of(
-				page.orElse(0),2,
+				page.orElse(0),8,
 				
 				Sort.Direction.ASC, sortBy.orElse( "id"))
 	);

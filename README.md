@@ -12,6 +12,8 @@ Proyecto final del team 1 en el BootCamp de T-Systems Reus. Nuestra página es u
 El back-end está implementado en el Framework de Spring, utilizando Maven project, y nuestra BBDD está desplegada en Heroku. Seguidamente, se muestran los endpoints y el nombre de cada función, de nuestra API.
 
 ### Book-controller
+
+```
 GET /books --> getAllBooks
 
 POST /books --> saveBook
@@ -33,8 +35,9 @@ GET /books/title/{title} --> getBooksByTitle
 GET /books/user/{id} --> findBooksByIdUsuario
 
 GET /bookspage --> getAPageBooks
-
+```
 ### Loan-controller
+```
 GET /loans --> getAllLoans
 
 POST /loans --> saveLoan
@@ -48,8 +51,9 @@ DELETE /loans/{id} --> deleteLoan
 GET /loans/book/{id} --> findLoansByBook
 
 GET /loans/usuario/{id} --> findLoansByUsuario
-
+```
 ### user-controller
+```
 POST /register --> saveUser
 
 GET /users --> getAllUsers
@@ -63,6 +67,7 @@ DELETE /users/{id} --> deleteUser
 PUT /users/pass/{id} --> updatePass
 
 GET /users/username/{username} --> getUsuarioByUsername
+```
 
 ## Diagrama d'entidad-relación
 

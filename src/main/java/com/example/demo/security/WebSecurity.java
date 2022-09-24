@@ -1,12 +1,12 @@
 package com.example.demo.security;
 
 import static com.example.demo.security.Constants.LOGIN_URL;
-import static com.example.demo.security.Constants.REGISTER_URL;
 
 import java.util.Arrays;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -44,17 +44,19 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 		 * 4. Login dont need auth
 		 * 5. All requests need auth except GET Books
 		 */
-		http
-				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+		http	.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				.and().cors()
 				.and().csrf().disable()
 				.authorizeRequests()
-//					.antMatchers(REGISTER_URL, LOGIN_URL).permitAll()
-//					.antMatchers(HttpMethod.GET, "/books").permitAll()
-//					.antMatchers(HttpMethod.GET, "/users").permitAll()
-//					.antMatchers(HttpMethod.GET, "/loans").permitAll()
-					.anyRequest().permitAll()
-//					.anyRequest().authenticated()
+				.antMatchers(HttpMethod.POST, LOGIN_URL).permitAll()
+	        	.antMatchers(
+	        			"/v2/api-docs",           
+	        			"/webjars/**",            
+	        			"/swagger-resources/**",  
+	        			"/swagger-ui/**",  		
+	        			"/configuration/**" 
+				).permitAll() 
+		        	.anyRequest().authenticated() 
 				.and()
 					.addFilter(new JWTAuthenticationFilter(authenticationManager()))
 					.addFilter(new JWTAuthorizationFilter(authenticationManager(), userDetailsService));
@@ -69,12 +71,12 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
-        configuration.setAllowedHeaders(Arrays.asList("authorization", "content-type", "x-auth-token"));
-        configuration.setExposedHeaders(Arrays.asList("x-auth-token"));
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
+		configuration.setAllowedOrigins(Arrays.asList("*"));
+		configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+		configuration.setAllowedHeaders(Arrays.asList("authorization", "content-type", "x-auth-token"));
+		configuration.setExposedHeaders(Arrays.asList("x-auth-token"));
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", configuration);
 		return source;
 	}
 }

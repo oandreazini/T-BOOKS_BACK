@@ -21,19 +21,18 @@ import com.example.demo.dto.Book;
 import com.example.demo.service.BookServiceImpl;
 import com.example.demo.service.UserDetailsServiceImpl;
 
-
 @RestController
 public class BookController {
 
 	@Autowired
 	BookServiceImpl bookServiceImpl;
-	
+
 	@Autowired
 	UserDetailsServiceImpl userServiceImpl;
-	
+
 	@Autowired
 	IBookDAO ibookDAO;
-	
+
 	@GetMapping("/books")
 	public List<Book> getAllBooks() {
 		return bookServiceImpl.listAllBooks();
@@ -72,43 +71,37 @@ public class BookController {
 	public void deleteBook(@PathVariable(name = "id") Long id) {
 		bookServiceImpl.deleteBook(id);
 	}
-	
+
 	@GetMapping("/books/title/{title}")
 	public List<Book> getBooksByTitle(@PathVariable(name = "title") String title) {
 		return bookServiceImpl.getBooksByTitle(title);
 	}
-	
+
 	@GetMapping("/books/editorial/{editorial}")
 	public List<Book> findBooksByEditorial(@PathVariable(name = "editorial") String editorial) {
 		return bookServiceImpl.findBooksByEditorial(editorial);
 	}
-	
+
 	@GetMapping("/books/author/{author}")
 	public List<Book> findBooksByAuthor(@PathVariable(name = "author") String author) {
 		return bookServiceImpl.findBooksByAuthor(author);
 	}
-	
+
 	@GetMapping("/books/user/{id}")
 	public List<Book> findBooksByIdUsuario(@PathVariable(name = "id") Long idUsuario) {
 		return bookServiceImpl.findBooksByUsuario(userServiceImpl.userById(idUsuario));
 	}
-	
+
 	@GetMapping("/books/isbn/{isbn}")
 	public List<Book> findBooksByIsbn(@PathVariable(name = "isbn") String isbn) {
 		return bookServiceImpl.findBooksByIsbn(isbn);
 	}
-	
+
 	@GetMapping("/bookspage")
-	public Page<Book> getAPageBooks(
-			@RequestParam Optional<String> sortBy,
-			@RequestParam Optional <Integer> page
-			) {
-		return ibookDAO.findAll(
-				PageRequest.of(
-				page.orElse(0),2,
-				
-				Sort.Direction.ASC, sortBy.orElse( "id"))
-	);
+	public Page<Book> getAPageBooks(@RequestParam Optional<String> sortBy, @RequestParam Optional<Integer> page) {
+		return ibookDAO.findAll(PageRequest.of(page.orElse(0), 2,
+
+				Sort.Direction.ASC, sortBy.orElse("id")));
 	}
-	
+
 }

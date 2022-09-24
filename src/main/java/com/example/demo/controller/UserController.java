@@ -23,7 +23,8 @@ import com.example.demo.dto.Usuario;
 import com.example.demo.service.UserDetailsServiceImpl;
 
 @RestController
-@CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE })
+@CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT,
+		RequestMethod.DELETE })
 public class UserController {
 
 	IUserDAO iUserDAO;
@@ -46,6 +47,7 @@ public class UserController {
 	@Autowired
 	UserDetailsServiceImpl userServiceImpl;
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/users")
 	public List<Usuario> getAllUsers() {
 		return userServiceImpl.listAllUsers();
@@ -54,16 +56,16 @@ public class UserController {
 	@PostMapping("/register")
 	public Usuario saveUser(@RequestBody Usuario u) {
 		Usuario user = new Usuario();
-		
+
 		user.setUsername(u.getUsername());
 		user.setPhone(u.getPhone());
 		user.setEmail(u.getEmail());
 		user.setName(u.getName());
 		user.setCity(u.getCity());
 		user.setPassword(bCryptPasswordEncoder.encode(u.getPassword()));
-		
+
 		user.addRole(new Role(11));
-		
+
 		return userServiceImpl.saveUser(user);
 	}
 
@@ -76,7 +78,7 @@ public class UserController {
 	public Usuario updateUser(@PathVariable(name = "id") Long id, @RequestBody Usuario u) {
 		Usuario selectedUser;
 		Usuario updatedUser;
-		
+
 		selectedUser = userServiceImpl.userById(id);
 
 		selectedUser.setName(u.getName());
@@ -89,12 +91,12 @@ public class UserController {
 		return updatedUser;
 
 	}
-	
+
 	@PutMapping("/users/pass/{id}")
 	public Usuario updatePass(@PathVariable(name = "id") Long id, @RequestBody Usuario u) {
 		Usuario selectedUser;
 		Usuario updatedUser;
-		
+
 		selectedUser = userServiceImpl.userById(id);
 
 		selectedUser.setPassword(bCryptPasswordEncoder.encode(u.getPassword()));
@@ -105,10 +107,12 @@ public class UserController {
 
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/users/{id}")
 	public void deleteUser(@PathVariable(name = "id") Long id) {
 		userServiceImpl.deleteUser(id);
 	}
+
 	
 	@GetMapping("/users/username/{username}")
 	public Usuario getUsuarioByUsername(@PathVariable(name = "username") String username) {

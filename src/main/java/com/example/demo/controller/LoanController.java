@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,13 +22,14 @@ public class LoanController {
 
 	@Autowired
 	LoanServiceImpl loanServiceImpl;
-	
+
 	@Autowired
 	BookServiceImpl bookServiceImpl;
-	
+
 	@Autowired
 	UserDetailsServiceImpl userServiceImpl;
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/loans")
 	public List<Loan> getAllLoans() {
 		return loanServiceImpl.listAllLoans();
@@ -66,12 +68,12 @@ public class LoanController {
 	public void deleteLoan(@PathVariable(name = "id") Long id) {
 		loanServiceImpl.deleteLoan(id);
 	}
-	
+
 	@GetMapping("/loans/book/{id}")
 	public List<Loan> findLoansByBook(@PathVariable(name = "id") Long idBook) {
 		return loanServiceImpl.findLoansByBook(bookServiceImpl.bookById(idBook));
 	}
-	
+
 	@GetMapping("/loans/usuario/{id}")
 	public List<Loan> findLoansByUsuario(@PathVariable(name = "id") Long idUser) {
 		return loanServiceImpl.findLoansByUsuario(userServiceImpl.userById(idUser));

@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -41,20 +42,20 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 		 * 1. Disables cookies 
 		 * 2. CORS config activation with default values
 		 * 3. Disables CSRF filter 
-		 * 4. Login dont need auth
-		 * 5. All requests need auth except GET Books
+		 * 4. Login, register and GET Books no auth
+		 * 5. All remaining requests need auth
 		 */
 		http
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				.and().cors()
 				.and().csrf().disable()
 				.authorizeRequests()
-//					.antMatchers(REGISTER_URL, LOGIN_URL).permitAll()
-//					.antMatchers(HttpMethod.GET, "/books").permitAll()
+					.antMatchers(REGISTER_URL, LOGIN_URL).permitAll()
+					.antMatchers(HttpMethod.GET, "/books").permitAll()
 //					.antMatchers(HttpMethod.GET, "/users").permitAll()
 //					.antMatchers(HttpMethod.GET, "/loans").permitAll()
-					.anyRequest().permitAll()
-//					.anyRequest().authenticated()
+//					.anyRequest().permitAll()
+					.anyRequest().authenticated()
 				.and()
 					.addFilter(new JWTAuthenticationFilter(authenticationManager()))
 					.addFilter(new JWTAuthorizationFilter(authenticationManager(), userDetailsService));

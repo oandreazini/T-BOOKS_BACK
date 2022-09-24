@@ -8,9 +8,9 @@ import com.example.demo.dto.Loan;
 import com.example.demo.dto.Book;
 import com.example.demo.dto.Usuario;
 
-public interface ILoanDAO extends JpaRepository<Loan, Long>{
-	
+public interface ILoanDAO extends JpaRepository<Loan, Long> {
+
 	public List<Loan> findLoansByBook(Book book);
-	
+
 	public List<Loan> findLoansByUsuario(Usuario usuario);
 }

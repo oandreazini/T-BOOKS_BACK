@@ -18,6 +18,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "books")
 public class Book {
 
+	// Attributes
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -36,8 +38,7 @@ public class Book {
 	@JoinColumn(name = "user")
 	private Usuario usuario;
 
-	
-	@OneToMany(mappedBy="id")
+	@OneToMany(mappedBy = "id")
 	private List<Loan> loans;
 
 	// Constructors
@@ -73,8 +74,7 @@ public class Book {
 		this.loans = loans;
 	}
 
-	
-	//Getters and setters
+	// Getters and setters
 	/**
 	 * @return the id
 	 */

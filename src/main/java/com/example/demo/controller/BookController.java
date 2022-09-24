@@ -106,7 +106,6 @@ public class BookController {
 						Sort.Direction.ASC, 
 						sortBy.orElse("id")
 						)
-				);
+		);
 	}
-
 }

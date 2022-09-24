@@ -99,9 +99,14 @@ public class BookController {
 
 	@GetMapping("/bookspage")
 	public Page<Book> getAPageBooks(@RequestParam Optional<String> sortBy, @RequestParam Optional<Integer> page) {
-		return ibookDAO.findAll(PageRequest.of(page.orElse(0), 2,
-
-				Sort.Direction.ASC, sortBy.orElse("id")));
+		return ibookDAO.findAll(
+				PageRequest.of(
+						page.orElse(0), 
+						12, 
+						Sort.Direction.ASC, 
+						sortBy.orElse("id")
+						)
+				);
 	}
 
 }

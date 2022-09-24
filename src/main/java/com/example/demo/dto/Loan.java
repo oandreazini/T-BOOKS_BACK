@@ -1,6 +1,5 @@
 package com.example.demo.dto;
 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +11,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "loans")
 public class Loan {
+
+	// Attributes
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -171,8 +172,8 @@ public class Loan {
 
 	@Override
 	public String toString() {
-		return "Loan [id=" + id + ", start=" + start + ", finish=" + finish + ", valuation="
-				+ valuation + ", comment=" + comment + ", usuario=" + usuario + ", book=" + book + "]";
+		return "Loan [id=" + id + ", start=" + start + ", finish=" + finish + ", valuation=" + valuation + ", comment="
+				+ comment + ", usuario=" + usuario + ", book=" + book + "]";
 	}
 
 }

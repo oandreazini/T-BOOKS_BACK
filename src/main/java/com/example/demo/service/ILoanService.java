@@ -9,12 +9,14 @@ import com.example.demo.dto.Usuario;
 public interface ILoanService {
 	/**
 	 * Lists all the Loans
+	 * 
 	 * @return
 	 */
 	public List<Loan> listAllLoans();
 
 	/**
 	 * Saves an Loan
+	 * 
 	 * @param l
 	 * @return
 	 */
@@ -22,6 +24,7 @@ public interface ILoanService {
 
 	/**
 	 * Gets the Loan by ID
+	 * 
 	 * @param id
 	 * @return
 	 */
@@ -29,17 +32,19 @@ public interface ILoanService {
 
 	/**
 	 * Updates the Loan
-	 * @param p
+	 * 
+	 * @param l
 	 * @return
 	 */
 	public Loan updateLoan(Loan l);
 
 	/**
 	 * Deletes the Loan
+	 * 
 	 * @param id
 	 */
 	public void deleteLoan(Long id);
-	
+
 	/**
 	 * Returns all the loans of the given book
 	 * 
@@ -47,13 +52,12 @@ public interface ILoanService {
 	 * @return
 	 */
 	public List<Loan> findLoansByBook(Book book);
-	
+
 	/**
-	 * Returns all the loans of the given user
+	 * Returns all the loans of the given usuario
 	 * 
-	 * @param book
+	 * @param usuario
 	 * @return
 	 */
 	public List<Loan> findLoansByUsuario(Usuario usuario);
 }
-

@@ -12,10 +12,10 @@ import com.example.demo.dto.Usuario;
 
 @Service
 public class LoanServiceImpl implements ILoanService {
-	
+
 	@Autowired
 	ILoanDAO iLoanDAO;
-	
+
 	@Override
 	public List<Loan> listAllLoans() {
 		return iLoanDAO.findAll();
@@ -45,7 +45,7 @@ public class LoanServiceImpl implements ILoanService {
 	public List<Loan> findLoansByBook(Book book) {
 		return iLoanDAO.findLoansByBook(book);
 	}
-	
+
 	@Override
 	public List<Loan> findLoansByUsuario(Usuario usuario) {
 		return iLoanDAO.findLoansByUsuario(usuario);

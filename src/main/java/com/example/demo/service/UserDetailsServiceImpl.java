@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.example.demo.dao.IUserDAO;
 import com.example.demo.dto.Usuario;
 
-
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService, IUserService {
 
@@ -52,18 +51,16 @@ public class UserDetailsServiceImpl implements UserDetailsService, IUserService 
 	public void deleteUser(Long id) {
 		iUserDAO.deleteById(id);
 	}
-	
+
 	@Override
 	public Usuario getUsuarioByUsername(String username) {
 		return iUserDAO.findByUsername(username);
 	}
 
-	
 	public Usuario getUsuarioByEmail(String email) {
 		return iUserDAO.findByEmail(email);
 	}
 
-	
 	public Usuario getUsuarioByPhone(String phone) {
 		return iUserDAO.findByPhone(phone);
 	}

@@ -10,8 +10,8 @@ import com.example.demo.dto.Book;
 import com.example.demo.dto.Usuario;
 
 @Service
-public class BookServiceImpl implements IBookService{
-	
+public class BookServiceImpl implements IBookService {
+
 	@Autowired
 	IBookDAO iBookDAO;
 
@@ -49,12 +49,12 @@ public class BookServiceImpl implements IBookService{
 	public List<Book> findBooksByEditorial(String editorial) {
 		return iBookDAO.findBooksByEditorial(editorial);
 	}
-	
+
 	@Override
 	public List<Book> findBooksByAuthor(String author) {
 		return iBookDAO.findBooksByAuthor(author);
 	}
-	
+
 	@Override
 	public List<Book> findBooksByUsuario(Usuario usuario) {
 		return iBookDAO.findBooksByUsuario(usuario);

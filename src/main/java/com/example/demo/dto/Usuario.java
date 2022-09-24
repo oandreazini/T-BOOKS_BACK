@@ -31,54 +31,50 @@ public class Usuario implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
 
+	// Attributes
+
 	public enum Rol {
-	    ADMIN,
-	    USER;
+		ADMIN, USER;
 	}
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String name;
-	
+
 	private String email;
-	
+
 	private String phone;
-	
+
 	private String city;
-	
+
 	private String username;
-	
+
 	private String password;
-	
+
 	@Enumerated(EnumType.STRING)
-    private Rol role = Rol.USER;
+	private Rol role = Rol.USER;
 
 	@ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-        name = "users_roles",
-        joinColumns = @JoinColumn(name = "users_id"),
-        inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private Set<Role> roles = new HashSet<>();     
-	
-	@OneToMany(mappedBy="id")
+	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "users_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private Set<Role> roles = new HashSet<>();
+
+	@OneToMany(mappedBy = "id")
 	private List<Loan> loans;
-	
-	@OneToMany(mappedBy="id")
+
+	@OneToMany(mappedBy = "id")
 	private List<Book> books;
 
-	
-	//Constructors
-	
+	// Constructors
+
 	/**
 	 * Default constructor
 	 */
 	public Usuario() {
 
 	}
-	
+
 	/**
 	 * Constructor with fields
 	 * 
@@ -92,7 +88,8 @@ public class Usuario implements UserDetails {
 	 * @param loans
 	 * @param books
 	 */
-	public Usuario(Long id, String name, String email, String phone, String city, String username, String password, List<Loan> loans, List<Book> books) {
+	public Usuario(Long id, String name, String email, String phone, String city, String username, String password,
+			List<Loan> loans, List<Book> books) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
@@ -104,9 +101,8 @@ public class Usuario implements UserDetails {
 		this.password = password;
 	}
 
-	
-	//Getters and Setters
-	
+	// Getters and Setters
+
 	/**
 	 * 
 	 * @return id
@@ -184,7 +180,7 @@ public class Usuario implements UserDetails {
 	public void setCity(String city) {
 		this.city = city;
 	}
-	
+
 	/**
 	 * 
 	 * @return username
@@ -261,49 +257,57 @@ public class Usuario implements UserDetails {
 		return "User [id=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + "]";
 	}
 
+	/**
+	 * 
+	 * @return roles set
+	 */
 	public Set<Role> getRoles() {
-        return roles;
-    }
- 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
-     
-    public void addRole(Role role) {
-        this.roles.add(role);
-    }
-    
-    @JsonIgnore
+		return roles;
+	}
+
+	/**
+	 * 
+	 * @param roles
+	 */
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
+	/**
+	 * 
+	 * @param role
+	 */
+	public void addRole(Role role) {
+		this.roles.add(role);
+	}
+
+	@JsonIgnore
 	@Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        for (Role role : roles) {
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
-        }
-        return authorities;
-    }
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+		for (Role role : roles) {
+			authorities.add(new SimpleGrantedAuthority(role.getName()));
+		}
+		return authorities;
+	}
 
 	@Override
 	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 

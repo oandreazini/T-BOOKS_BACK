@@ -29,7 +29,6 @@ public class LoanController {
 	@Autowired
 	UserDetailsServiceImpl userServiceImpl;
 
-	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/loans")
 	public List<Loan> getAllLoans() {
 		return loanServiceImpl.listAllLoans();

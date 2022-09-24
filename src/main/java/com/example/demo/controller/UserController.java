@@ -47,7 +47,6 @@ public class UserController {
 	@Autowired
 	UserDetailsServiceImpl userServiceImpl;
 
-	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/users")
 	public List<Usuario> getAllUsers() {
 		return userServiceImpl.listAllUsers();
@@ -107,7 +106,6 @@ public class UserController {
 
 	}
 
-	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/users/{id}")
 	public void deleteUser(@PathVariable(name = "id") Long id) {
 		userServiceImpl.deleteUser(id);

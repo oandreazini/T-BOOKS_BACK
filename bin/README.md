@@ -11,6 +11,10 @@ Proyecto final del team 1 en el BootCamp de T-Systems Reus. Nuestra página es u
 ## Documentación de la API
 El back-end está implementado en el Framework de Spring, utilizando Maven project, y nuestra BBDD está desplegada en Heroku. Seguidamente, se muestran los endpoints y el nombre de cada función, de nuestra API.
 
+#### URL Swagger
+
+https://swagger-tbooks.herokuapp.com/swagger-ui/
+
 ### Book-controller
 
 ```
